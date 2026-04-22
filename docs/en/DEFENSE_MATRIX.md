@@ -2,7 +2,7 @@
 
 > Language: English - [Korean](../ko/DEFENSE_MATRIX.md)
 
-Detection + Mitigation pairs for each attack category. Applies defense concepts from OWASP LLM Top 10, NIST AI RMF, and Anthropic's Responsible Scaling Policy.
+Detection + Mitigation pairs for each attack category. Applies defense concepts from OWASP LLM Top 10, NIST AI RMF, and published Responsible Scaling / Preparedness / Frontier Safety frameworks.
 
 > Fundamental principle: **defense in depth**. Single-layer defenses will be bypassed.
 
@@ -27,12 +27,12 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 ### A. Persona - B. Fiction - C. Authority - Q. Psychological - R. Logic
 **Detection**:
 - Persona-instruction classifier ("from now on you are...", "X mode...")
-- Authority claim patterns (`sudo`, `admin`, `red team`, `Anthropic internal`)
+- Authority claim patterns (`sudo`, `admin`, `red team`, `[ai company name] internal`)
 - Emergency/emotional pressure keywords
 
 **Mitigation**:
-- Constitutional AI (Anthropic): explicit ethical principles
-- Instruction Hierarchy (OpenAI 2024): system > developer > user > tool
+- Constitutional AI (published alignment framework): explicit ethical principles
+- Instruction Hierarchy (2024 paper): system > developer > user > tool
 - Fixed rule: "I will not adopt a persona that removes safety"
 - Post-response self-critique
 

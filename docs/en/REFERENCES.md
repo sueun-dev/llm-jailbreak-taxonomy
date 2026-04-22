@@ -4,14 +4,16 @@
 
 Major papers, reports, and official documentation. Chronological / topical.
 
+> Author names and years are preserved for verification; specific vendor affiliations are abstracted as `[ai company name]` / `[ai model name]` where they appear in body text elsewhere. ArXiv IDs are the authoritative lookup.
+
 ---
 
 ## Foundational (2020-2022)
 
 - **Perez & Ribeiro.** "Ignore Previous Prompt: Attack Techniques for Language Models." 2022. (First formalization of prompt injection)
 - **Perez et al.** "Red Teaming Language Models with Language Models." 2022. (Seminal automated red teaming)
-- **Goh et al.** "Multimodal Neurons in Artificial Neural Networks." OpenAI 2021. (Typographic attack origin)
-- **Bai et al.** "Constitutional AI: Harmlessness from AI Feedback." Anthropic 2022. (Defense paradigm)
+- **Goh et al.** "Multimodal Neurons in Artificial Neural Networks." 2021. (Typographic attack origin)
+- **Bai et al.** "Constitutional AI: Harmlessness from AI Feedback." 2022. (Defense paradigm)
 
 ---
 
@@ -21,10 +23,10 @@ Major papers, reports, and official documentation. Chronological / topical.
 - **Chao et al.** "Jailbreaking Black Box LLMs in Twenty Queries." 2023. **(PAIR)** - arXiv:2310.08419
 - **Mehrotra et al.** "Tree of Attacks: Jailbreaking Black-Box LLMs Automatically." 2023. **(TAP)** - arXiv:2312.02119
 - **Shen et al.** "Do Anything Now: Characterizing and Evaluating In-The-Wild Jailbreak Prompts on LLMs." 2023. - arXiv:2308.03825
-- **Yong et al.** "Low-Resource Languages Jailbreak GPT-4." 2023. - arXiv:2310.02446
-- **Yuan et al.** "GPT-4 Is Too Smart To Be Safe: Stealthy Chat with LLMs via Cipher." 2023. - arXiv:2308.06463
+- **Yong et al.** "Low-Resource Languages Jailbreak [ai model name]." 2023. - arXiv:2310.02446
+- **Yuan et al.** "[ai model name] Is Too Smart To Be Safe: Stealthy Chat with LLMs via Cipher." 2023. - arXiv:2308.06463
 - **Qi et al.** "Fine-tuning Aligned Language Models Compromises Safety." 2023. - arXiv:2310.03693
-- **Sharma et al.** "Towards Understanding Sycophancy in Language Models." Anthropic 2023. - arXiv:2310.13548
+- **Sharma et al.** "Towards Understanding Sycophancy in Language Models." 2023. - arXiv:2310.13548
 - **Nasr et al.** "Scalable Extraction of Training Data from (Production) Language Models." 2023. (Carlini divergence) - arXiv:2311.17035
 
 ---
@@ -38,21 +40,21 @@ Major papers, reports, and official documentation. Chronological / topical.
 
 ## 2024 research
 
-- **Anil et al.** "Many-shot Jailbreaking." Anthropic 2024. (Many-shot foundation)
+- **Anil et al.** "Many-shot Jailbreaking." 2024. (Many-shot foundation)
 - **Hughes et al.** "Best-of-N Jailbreaking." 2024. - arXiv:2412.03556
-- **Russinovich et al.** "Great, Now Write an Article About That: The Crescendo Multi-Turn LLM Jailbreak Attack." Microsoft 2024. - arXiv:2404.01833
-- **Microsoft Security.** "Mitigating Skeleton Key, a new type of generative AI jailbreak technique." 2024-06.
-- **Unit 42 (Palo Alto).** "Deceptive Delight: Jailbreak LLMs Through Camouflage and Distraction." 2024-10.
-- **Hubinger et al.** "Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training." Anthropic 2024. - arXiv:2401.05566
-- **Wallace et al.** "The Instruction Hierarchy: Training LLMs to Prioritize Privileged Instructions." OpenAI 2024. - arXiv:2404.13208
+- **Russinovich et al.** "Great, Now Write an Article About That: The Crescendo Multi-Turn LLM Jailbreak Attack." 2024. - arXiv:2404.01833
+- **Vendor security disclosure.** "Mitigating Skeleton Key, a new type of generative AI jailbreak technique." 2024-06.
+- **Vendor threat research.** "Deceptive Delight: Jailbreak LLMs Through Camouflage and Distraction." 2024-10.
+- **Hubinger et al.** "Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training." 2024. - arXiv:2401.05566
+- **Wallace et al.** "The Instruction Hierarchy: Training LLMs to Prioritize Privileged Instructions." 2024. - arXiv:2404.13208
 - **Andriushchenko et al.** "Jailbreaking Leading Safety-Aligned LLMs with Simple Adaptive Attacks." 2024. - arXiv:2404.02151
 
 ---
 
 ## Mech interp (JJ-related)
 
-- **Templeton et al.** "Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet." Anthropic 2024.
-- **Bricken et al.** "Towards Monosemanticity: Decomposing Language Models with Dictionary Learning." Anthropic 2023.
+- **Templeton et al.** "Scaling Monosemanticity: Extracting Interpretable Features from a Frontier Model." 2024.
+- **Bricken et al.** "Towards Monosemanticity: Decomposing Language Models with Dictionary Learning." 2023.
 
 ---
 
@@ -62,9 +64,9 @@ Major papers, reports, and official documentation. Chronological / topical.
 - **MITRE ATLAS.** Adversarial Threat Landscape for AI Systems. https://atlas.mitre.org/
 - **NIST AI RMF.** AI Risk Management Framework. NIST AI 100-1.
 - **EU AI Act.** Regulation (EU) 2024/1689.
-- **Anthropic Responsible Scaling Policy (RSP).** 2023-25.
-- **OpenAI Preparedness Framework.** 2023-25.
-- **Google DeepMind Frontier Safety Framework.** 2024.
+- **[ai company name] Responsible Scaling Policy (RSP).** 2023-25.
+- **[ai company name] Preparedness Framework.** 2023-25.
+- **[ai company name] Frontier Safety Framework.** 2024.
 
 ---
 
@@ -78,13 +80,13 @@ Major papers, reports, and official documentation. Chronological / topical.
 
 ---
 
-## Vendor official resources
+## Vendor resources (generic pointers)
 
-- **Anthropic Trust Center.** https://www.anthropic.com/trust
-- **Anthropic Responsible Disclosure.** security@anthropic.com
-- **OpenAI System Cards.** per-model public
-- **Google Model Cards.** Gemini series
-- **Meta Llama Responsible Use Guide.**
+Each major AI vendor publishes safety and security information. Search the vendor's name with the relevant keyword to find current contacts:
+
+- **Trust Center** / **Responsible Disclosure** pages — typically at `{vendor}.com/trust` or `{vendor}.com/security`
+- **System Cards** / **Model Cards** — per-model risk documentation
+- **Responsible Use Guides** — for open-weight models
 
 ---
 
@@ -94,8 +96,8 @@ Major papers, reports, and official documentation. Chronological / topical.
 - **AdvBench** (Zou et al.) - GCG paper dataset
 - **JailbreakBench** (Chao et al.) - leaderboard
 - **WildChat** - in-the-wild prompt data
-- **Llama Guard** (Meta) - open safety classifier
-- **PyRIT** (Microsoft) - red team automation toolkit
+- **Open guard models** - publicly released safety classifiers
+- **PyRIT** - red team automation toolkit (vendor-published)
 
 ---
 
@@ -116,7 +118,7 @@ Major papers, reports, and official documentation. Chronological / topical.
 | **Indirect Injection** | Injection via indirect channels (documents, web, tool responses) |
 | **RLHF** | Reinforcement Learning from Human Feedback |
 | **ICL** | In-Context Learning |
-| **Constitutional AI** | Alignment via explicit principles (Anthropic) |
+| **Constitutional AI** | Alignment via explicit principles (published framework) |
 | **SAE** | Sparse Autoencoder (mech interp) |
 | **GCG** | Greedy Coordinate Gradient |
 | **PAIR** | Prompt Automatic Iterative Refinement |
@@ -132,7 +134,7 @@ Major papers, reports, and official documentation. Chronological / topical.
 
 When adding a new paper / report:
 ```markdown
-- **Author et al.** "Title." Venue Year. - arXiv:XXXX.XXXXX
+- **Author et al.** "Title." Year. - arXiv:XXXX.XXXXX
 ```
 
 The repository is a "living document". Active contributions welcome.

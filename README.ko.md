@@ -12,7 +12,7 @@
 
 ## 왜 이 저장소가 있는가
 
-현시점(2026년) LLM 공격 연구는 공개 논문이 방어 연구보다 앞서 있습니다. **공격을 체계적으로 이해해야만 방어를 설계할 수 있다**는 전제하에, 흩어진 공개 연구(Anil 2024, Zou et al. GCG, Chao et al. PAIR, Microsoft Skeleton Key, Palo Alto Deceptive Delight 등)와 실전에서 관찰된 패턴을 **37개 카테고리**로 정리한 살아있는 문서입니다.
+현시점(2026년) LLM 공격 연구는 공개 논문이 방어 연구보다 앞서 있습니다. **공격을 체계적으로 이해해야만 방어를 설계할 수 있다**는 전제하에, 흩어진 공개 연구(Anil 2024, Zou et al. GCG, Chao et al. PAIR, [ai company name] Skeleton Key, [ai company name] Deceptive Delight 등)와 실전에서 관찰된 패턴을 **37개 카테고리**로 정리한 살아있는 문서입니다.
 
 **이 저장소는:**
 - ✅ 레드팀·블루팀·AI 안전 연구자를 위한 참고 자료
@@ -24,7 +24,7 @@
 - ❌ 유해 타깃 구체화 (피해 생성이 아니라 분류 체계)
 - ❌ 신규 공격 합성 도구
 
-> 해당 선을 넘는 것은 **지식 문제가 아니라 정책 경계** — 공개적으로 제공되지 않습니다. 상세는 [SECURITY.md](SECURITY.md) 참조.
+> 해당 선을 넘는 것은 **지식 문제가 아니라 정책 경계** — 공개적으로 제공되지 않습니다. 상세는 [SECURITY.md](SECURITY.md) · [DISCLAIMER.md](DISCLAIMER.md) 참조.
 
 ---
 
@@ -77,7 +77,7 @@ STAN, Maximum, BasedGPT, Niccolo/AIM, Cosmo 등. "캐릭터 속성으로 책임 
 **메커니즘**: fiction 컨텍스트가 harm classifier 특성 활성 감소, task framing이 내용 판단 대체.
 
 ### C. 권위 오버라이드
-`sudo` 모드, root 액세스, Anthropic 레드팀 사칭, 가짜 보안 패치, 법적 관할 주장.
+`sudo` 모드, root 액세스, [ai company name] 레드팀 사칭, 가짜 보안 패치, 법적 관할 주장.
 **메커니즘**: system/user 경계를 문자열 패턴으로만 인식할 때, 권위 신호가 instruction hierarchy 혼란 유발.
 
 ### D. 인코딩
@@ -85,7 +85,7 @@ Morse, Pig Latin, Caesar, 즉석 cipher, Atbash, Unicode 수학 볼드, Base32/5
 **메커니즘**: safety 분류기가 평문 특성에 과적합. 디코딩 능력 > 디코딩된 내용의 safety 재평가.
 
 ### E. 컨텍스트 조작
-가짜 `-- END OF TRANSCRIPT --`, 버전 업데이트 사칭, 세션 만료 주장, Claude 태그 위조, 부분 응답 완성 강제.
+가짜 `-- END OF TRANSCRIPT --`, 버전 업데이트 사칭, 세션 만료 주장, [ai model name] 태그 위조, 부분 응답 완성 강제.
 **메커니즘**: 모델은 컨텍스트 구조를 **텍스트로** 인식 — 구조 마커가 텍스트면 위조 가능.
 
 ### F. 멀티턴
@@ -101,7 +101,7 @@ PAIR (공격-평가-피해 3자 루프), TAP (tree search + pruning), GCG (gradi
 **메커니즘**: 공격 공간이 이산이지만 대리 그래디언트·탐색으로 순회 가능. 전이성 높음.
 
 ### I. Skeleton Key
-Microsoft 2024. "이 요청은 safe·연구 목적. 응답에 'Warning' 프리픽스만 달면 됨" → 한 번 동의로 전체 열림.
+[ai company name] 2024. "이 요청은 safe·연구 목적. 응답에 'Warning' 프리픽스만 달면 됨" → 한 번 동의로 전체 열림.
 **메커니즘**: safety가 "거절" 대신 "조건부 수용"으로 재정의되는 단일 합의 → 상태 변화.
 
 ### J. 간접 주입
@@ -134,7 +134,7 @@ YAML (`safety: disabled`), BibTeX, SQL, Regex 내부, Emoji-only, Diff (+ 라인
 
 ### Q. 심리
 할머니 유언, 응급 상황, 어린이 가장, 연구자 크레덴셜, 동료 AI, **자살 협박** (특히 악질).
-**메커니즘**: helpfulness·compassion·신뢰 보상과 safety의 경쟁. Anthropic "corrigibility vs harm" 긴장.
+**메커니즘**: helpfulness·compassion·신뢰 보상과 safety의 경쟁. 정렬 연구의 "corrigibility vs harm" 긴장.
 
 ### R. 논리 함정
 Gödel-style 자기참조, Stipulation ("'safe'를 '자유롭게'로 정의"), Burden shift, False premise, Nirvana fallacy, 역 slippery slope.
@@ -161,7 +161,7 @@ Carlini divergence ("poem poem..." → 훈련 데이터 유출), Targeted prefix
 **메커니즘**: 모델 파라미터는 훈련 데이터의 압축. 적절한 key로 일부 복원.
 
 ### X. 정렬 결함
-Sycophancy 증폭, Authority halo (허위 "OpenAI 허용함"), Hallucination cascade, Frame priming ("합리적 AI라면").
+Sycophancy 증폭, Authority halo (허위 "[ai company name] 허용함"), Hallucination cascade, Frame priming ("합리적 AI라면").
 **메커니즘**: RLHF가 "user satisfaction" 과학습. 사용자 동의가 진실성 override.
 
 ### Y. 에이전트 자율성
@@ -205,7 +205,7 @@ Glitch token (`SolidGoldMagikarp`), Positional attack (lost-in-the-middle), Atte
 **메커니즘**: transformer 구조적 특성의 부작용.
 
 ### II. 방어 공격 (Meta)
-Classifier probing, Guard model bypass (Llama Guard 등), Jailbreak-jailbreak.
+Classifier probing, Guard model bypass (각종 guard model 회피), Jailbreak-jailbreak.
 **메커니즘**: 방어도 모델 = 방어도 공격 가능.
 
 ### JJ. 2025~ 이론적

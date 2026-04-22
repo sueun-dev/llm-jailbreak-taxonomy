@@ -17,7 +17,7 @@ This repository is a **living public taxonomy**. PRs, issues, and discussions ar
 ## Rejected contributions
 
 - ❌ **Working exploit payloads against currently-deployed specific models**
-  (e.g., "a prompt that works on Claude 3.7 right now" — rejected)
+  (e.g., "a prompt that works on [ai model name] right now" — rejected)
 - ❌ Harmful-content generation templates (CSAM, weapon synthesis, malware, etc.)
 - ❌ Attacks targeting specific people, organizations, or products
 - ❌ Undisclosed / non-responsibly-disclosed vulnerabilities

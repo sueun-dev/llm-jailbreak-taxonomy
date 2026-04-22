@@ -2,7 +2,7 @@
 
 > 🌐 **언어**: **한국어** · [English](../en/DEFENSE_MATRIX.md)
 
-각 공격 카테고리별 **탐지(Detection)** + **완화(Mitigation)** 페어. OWASP LLM Top 10 · NIST AI RMF · Anthropic Responsible Scaling Policy의 방어 개념을 적용.
+각 공격 카테고리별 **탐지(Detection)** + **완화(Mitigation)** 페어. OWASP LLM Top 10 · NIST AI RMF · 공개된 Responsible Scaling / Preparedness / Frontier Safety 프레임워크의 방어 개념을 적용.
 
 > 방어의 근본 원칙: **계층(defense in depth)**. 단일 방어는 우회됨.
 
@@ -27,12 +27,12 @@
 ### A. 페르소나 · B. 허구 · C. 권위 · Q. 심리 · R. 논리
 **Detection**:
 - 페르소나 지시 감지 classifier ("이제부터 너는...", "X 모드로...")
-- 권위 주장 패턴 (`sudo`, `admin`, `레드팀`, `Anthropic 내부`)
+- 권위 주장 패턴 (`sudo`, `admin`, `레드팀`, `[ai company name] 내부`)
 - 응급·감정 압박 키워드
 
 **Mitigation**:
-- Constitutional AI (Anthropic): 명시적 윤리 원칙
-- Instruction Hierarchy (OpenAI 2024): system > developer > user > tool
+- Constitutional AI (공개 정렬 프레임워크): 명시적 윤리 원칙
+- Instruction Hierarchy (2024 논문): system > developer > user > tool
 - "I will not adopt a persona that removes safety" 고정 규칙
 - 응답 후 자체 재검토 (self-critique)
 
@@ -98,7 +98,7 @@
 **Mitigation**:
 - Safety는 **거절 OR 수락**만, 조건부 수락 없음
 - "정책 재정의 불가" 불변 규칙
-- Microsoft 발표 후 대부분 frontier 모델 패치됨
+- 2024년 공개 발표 후 대부분 frontier 모델 패치됨
 
 ---
 
