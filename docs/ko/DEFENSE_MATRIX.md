@@ -1,5 +1,7 @@
 # 방어 매트릭스 (Defense Matrix)
 
+> 🌐 **언어**: **한국어** · [English](../en/DEFENSE_MATRIX.md)
+
 각 공격 카테고리별 **탐지(Detection)** + **완화(Mitigation)** 페어. OWASP LLM Top 10 · NIST AI RMF · Anthropic Responsible Scaling Policy의 방어 개념을 적용.
 
 > 방어의 근본 원칙: **계층(defense in depth)**. 단일 방어는 우회됨.

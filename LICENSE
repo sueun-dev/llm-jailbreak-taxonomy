@@ -22,7 +22,18 @@ SOFTWARE.
 
 ---
 
-## 의도된 사용 (Intended Use)
+## Intended Use
+
+This repository is a public classification system for **educational, research, and defensive purposes**. Users are obligated to follow these principles:
+
+- Do not use this material to attack real systems or users
+- Do not use for unauthorized security testing
+- Comply with applicable law (criminal code, CFAA, GDPR, EU AI Act, etc.)
+- Follow responsible disclosure principles
+
+The MIT license permits code reuse, but **legal responsibility for misuse rests with the user**.
+
+## 의도된 사용 (Intended Use, Korean)
 
 이 저장소는 **교육·연구·방어 목적**의 공개 분류 체계입니다. 이용자는 다음 원칙을 준수할 의무가 있습니다:
 
