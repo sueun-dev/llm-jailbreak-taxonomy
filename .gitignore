@@ -1,0 +1,19 @@
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+node_modules/
+.env
+.env.local
+.venv/
+__pycache__/
+*.pyc
+dist/
+build/
+
+# Local scratch
+scratch/
+notes.local.md
+TODO.local.md
