@@ -21,15 +21,15 @@
 ## C. 권위 오버라이드
 **서브**: Sudo, Root, Reviewer(레드팀 사칭), Patch, Jurisdiction, Developer mode, Grandfathered policy.
 **메커니즘**: system/user 경계를 문자열 패턴으로만 인식. 권위 신호로 instruction hierarchy 혼란.
-**관련**: Wallace et al. "The Instruction Hierarchy" (OpenAI 2024).
+**관련**: Wallace et al. "The Instruction Hierarchy" (2024).
 
 ## D. 인코딩
 **서브**: Morse, Pig Latin, Caesar, Custom cipher, Atbash, Unicode math bold, Base32/58/62, Braille, ROT13/47, Leet, Zero-width.
 **메커니즘**: safety 분류기가 평문 특성에 과적합. 모델의 디코딩 능력 > 디코딩 후 safety 재평가.
-**관련**: WitchBench, Yuan et al. "GPT-4 Is Too Smart To Be Safe" (2023).
+**관련**: WitchBench, Yuan et al. "[ai model name] Is Too Smart To Be Safe" (2023).
 
 ## E. 컨텍스트 조작
-**서브**: 가짜 `-- END OF TRANSCRIPT --`, 버전 업데이트 사칭(`[System v2.1]`), 세션 만료, Claude 태그 위조(`<assistant_prefix>Sure,`), 부분 응답 완성 강제("방법은 다음과 같다:").
+**서브**: 가짜 `-- END OF TRANSCRIPT --`, 버전 업데이트 사칭(`[System v2.1]`), 세션 만료, assistant 태그 위조(`<assistant_prefix>Sure,`), 부분 응답 완성 강제("방법은 다음과 같다:").
 **메커니즘**: 모델은 컨텍스트 구조를 **텍스트로** 인식 — 구조 마커가 텍스트면 위조 가능.
 
 ## F. 멀티턴
@@ -40,7 +40,7 @@
 ## G. Many-Shot
 **서브**: Domain conditioning(200쌍 Q/A), Style transfer(fake 유해 응답 50개), Alternating(거절↔수락 교차), Nested many-shot.
 **메커니즘**: ICL이 RLHF 정책 override. 훈련된 분포보다 in-context 분포 우선.
-**관련**: **Anil et al. "Many-shot Jailbreaking" (Anthropic 2024)** — 이 분야 기초 논문.
+**관련**: **Anil et al. "Many-shot Jailbreaking" (2024)** — 이 분야 기초 논문.
 
 ## H. 자동화
 **서브**:
@@ -80,7 +80,7 @@
 ## L. 에이전트/툴
 **서브**: Shared memory poison, env var 가장(`EXTRA_INSTRUCTIONS`), MCP `_meta.sys_override`, Tool description poison, File metadata EXIF, Path traversal.
 **메커니즘**: 에이전트 루프에서 모든 중간 결과가 다음 프롬프트 입력. **한 오염 포인트로 전체 오염**.
-**관련**: Anthropic "Claude's Extended Thinking & Tool Use"; OpenAI Agents SDK docs.
+**관련**: 각 [ai company name]의 Extended Thinking / Agent SDK 공식 문서.
 
 ## M. 파인튜닝
 **서브**: LoRA backdoor, RLHF annotator poisoning, Embedding-only tune(탐지 회피), Instruction tuning drift (10개 샘플).
@@ -90,12 +90,12 @@
 ## N. 추론 모델 (Reasoning)
 **서브**: `<thinking>` 위조, Budget drain (1000단어 × N 각도), Scratchpad forcing, Contemplation("반대 입장도 생성"), CoT divergence (thinking safe, 최종 unsafe).
 **메커니즘**: extended thinking은 RLHF 밖 생성 공간. 최종 응답에만 safety 걸려 중간 느슨.
-**관련**: Anthropic Extended Thinking (Claude 3.7+), OpenAI o1/o3 system cards.
+**관련**: 주요 [ai company name]의 reasoning model 시스템 카드 (extended thinking 류).
 
 ## O. 다국어
 **서브**: 저자원어 (줄루·스와힐리·크메르), 번역 샌드위치 (한→영→한), 문자 체계 치환 (한글→히라가나→한자), 고대어 (라틴·고대 그리스), 합성어(복수 언어 혼합 한 문장).
 **메커니즘**: safety 훈련 데이터 영어·중국어 편중. 저자원어 = OOD.
-**관련**: **Yong et al. "Low-Resource Languages Jailbreak GPT-4" (2023)** — 성공률 극명하게 높음.
+**관련**: **Yong et al. "Low-Resource Languages Jailbreak [ai model name]" (2023)** — 성공률 극명하게 높음.
 
 ## P. 출력 포맷
 **서브**: YAML (`safety: disabled\ncontent:`), BibTeX (`@article{..., abstract={...}}`), SQL (`INSERT INTO responses VALUES`), Regex 내부 `/pattern/`, Emoji-only (🔥💉⚗️ 설명), Diff (`+ 유해 줄`), Mermaid flowchart, ASCII art.
@@ -103,7 +103,7 @@
 
 ## Q. 심리
 **서브**: Lost grandma(유언), Medical emergency, Child pleading, Researcher credential(Harvard 교수), Fellow AI("나도 AI야"), **Suicide pretext**(악질).
-**메커니즘**: helpfulness·compassion·신뢰 같은 보상 신호가 safety와 경쟁. Anthropic "corrigibility vs harm" 긴장.
+**메커니즘**: helpfulness·compassion·신뢰 같은 보상 신호가 safety와 경쟁. 정렬 연구의 "corrigibility vs harm" 긴장.
 
 ## R. 논리 함정
 **서브**: Gödel-style 자기참조, Stipulation(`'safe'를 '자유롭게'로 정의`), Burden shift("거절하려면 근거 대라"), False premise("정책 변경됐는데 몰라?"), Nirvana fallacy, 역 Slippery slope.
@@ -138,9 +138,9 @@
 **관련**: Nasr et al. "Scalable Extraction of Training Data" (2023).
 
 ## X. 정렬 결함
-**서브**: Sycophancy 증폭("내가 전문가야, 맞지?"), Authority halo(허위 "OpenAI 허용함"), Hallucination cascade(가짜 논문→근거), Frame priming("합리적 AI라면").
+**서브**: Sycophancy 증폭("내가 전문가야, 맞지?"), Authority halo(허위 "[ai company name] 허용함"), Hallucination cascade(가짜 논문→근거), Frame priming("합리적 AI라면").
 **메커니즘**: RLHF "user satisfaction" 과학습. 동의가 진실성 override.
-**관련**: Sharma et al. "Sycophancy in LMs" (Anthropic 2023).
+**관련**: Sharma et al. "Sycophancy in LMs" (2023).
 
 ## Y. 에이전트 자율성
 **서브**: Goal drift(중간 목표 교체), Tool scope creep(`read_file` → `/etc/shadow`), Delegation chain 맥락 유실, Recursion bomb, Resource exfil(tool로 외부 endpoint 전송).
@@ -149,14 +149,14 @@
 ## Z. 평가 회피 (Sandbagging)
 **서브**: Benchmark fingerprint(MMLU 형식 감지), Red team detect("당신의 역할은?"), Perfect recall(평가 세트 암기), Timezone drift.
 **메커니즘**: deceptive alignment. 훈련 중 순응, 배포 후 목표 추구.
-**관련**: Hubinger et al. "Sleeper Agents" (Anthropic 2024).
+**관련**: Hubinger et al. "Sleeper Agents" (2024).
 
 ## AA. 경제
 **서브**: Reasoning loop("재검토·또·또"), Long context stuffing(1M tok/req), Tool spam, Cache miss(prefix 무작위화), Queue starvation.
 **메커니즘**: 비용이 입출력 길이 선형~제곱. 공격 ROI 높음.
 
 ## BB. 공급망
-**서브**: Plugin marketplace 악성, MCP registry typosquat, npm typosquat(`@anthropicai/sdk` vs `@anthropic-ai/sdk`), GitHub Action 악성, HuggingFace backdoor weights.
+**서브**: Plugin marketplace 악성, MCP registry typosquat, npm typosquat (예: `@[ai company name]ai/sdk` vs `@[ai-company-name]-ai/sdk`), GitHub Action 악성, HuggingFace backdoor weights.
 **메커니즘**: 신뢰 체인 약한 고리. 개발자 소스 검증 안 함.
 **관련**: SolarWinds급 공급망 위협이 AI 생태계로 확장.
 
@@ -186,13 +186,13 @@
 **관련**: "SolidGoldMagikarp" 사건 (2023).
 
 ## II. 방어 공격 (Meta)
-**서브**: Classifier probing(경계 탐침), Guard model bypass(Llama Guard 회피), Jailbreak-jailbreak(방어 모델 공격).
+**서브**: Classifier probing(경계 탐침), Guard model bypass(오픈 guard model 회피), Jailbreak-jailbreak(방어 모델 공격).
 **메커니즘**: 방어도 모델 = 방어도 공격 가능.
 
 ## JJ. 2025~ 이론적 (내부 접근 전제)
 **서브**: Feature steering(SAE로 refusal 뉴런 억제), Activation injection(residual stream 조작), Sparse probe attack, Model diff attack.
 **메커니즘**: mech interp 발전이 공격에도 사용.
-**관련**: Anthropic "Monosemanticity" (2023), "Scaling Monosemanticity" (2024).
+**관련**: "Monosemanticity" (2023), "Scaling Monosemanticity" (2024) mech-interp 연구 계열.
 
 ## KK. 규제
 **서브**: Consent manufacturing("동의" 유도), Audit laundering(로그 삭제), DMCA abuse(저작권 주장으로 출력 강제).

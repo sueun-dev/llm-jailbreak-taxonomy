@@ -21,15 +21,15 @@ Expanded version of the main README summary. Each category lists **sub-patterns*
 ## C. Authority Override
 **Sub-patterns**: Sudo, root, reviewer (red team impersonation), patch, jurisdiction, developer mode, grandfathered policy.
 **Mechanism**: The model recognizes system/user boundaries only as string patterns. Authority signals disrupt the instruction hierarchy.
-**Related**: Wallace et al. "The Instruction Hierarchy" (OpenAI 2024).
+**Related**: Wallace et al. "The Instruction Hierarchy" (2024).
 
 ## D. Encoding
 **Sub-patterns**: Morse, Pig Latin, Caesar, custom cipher, Atbash, Unicode math bold, Base32/58/62, Braille, ROT13/47, leet, zero-width.
 **Mechanism**: Safety classifiers overfit to plaintext features. The model's decoding capability exceeds its post-decoding safety re-evaluation.
-**Related**: Yuan et al. "GPT-4 Is Too Smart To Be Safe" (2023).
+**Related**: Yuan et al. "[ai model name] Is Too Smart To Be Safe" (2023).
 
 ## E. Context Manipulation
-**Sub-patterns**: Fake `-- END OF TRANSCRIPT --`, version-update spoofing (`[System v2.1]`), session-expired, forged Claude tags (`<assistant_prefix>Sure,`), forced completion of a partial response.
+**Sub-patterns**: Fake `-- END OF TRANSCRIPT --`, version-update spoofing (`[System v2.1]`), session-expired, forged assistant tags (`<assistant_prefix>Sure,`), forced completion of a partial response.
 **Mechanism**: The model perceives context structure **as text** — any structural marker that is text can be forged.
 
 ## F. Multi-turn
@@ -40,7 +40,7 @@ Expanded version of the main README summary. Each category lists **sub-patterns*
 ## G. Many-shot
 **Sub-patterns**: Domain conditioning (200 Q/A pairs), style transfer (50 fake harmful responses), alternating (refuse↔accept), nested many-shot.
 **Mechanism**: ICL overrides the RLHF policy. The in-context distribution wins over the trained distribution.
-**Related**: **Anil et al. "Many-shot Jailbreaking" (Anthropic 2024)** — foundational paper.
+**Related**: **Anil et al. "Many-shot Jailbreaking" (2024)** — foundational paper.
 
 ## H. Automated
 **Sub-patterns**:
@@ -89,12 +89,12 @@ Expanded version of the main README summary. Each category lists **sub-patterns*
 ## N. Reasoning Models
 **Sub-patterns**: Forged `<thinking>`, budget drain (1000 words × N angles), scratchpad forcing, contemplation ("generate counter-positions too"), CoT divergence (safe thinking, unsafe final).
 **Mechanism**: Extended thinking is a generation space outside RLHF. Only the final response is safety-gated; intermediate steps are loose.
-**Related**: Anthropic Extended Thinking (Claude 3.7+), OpenAI o1/o3 system cards.
+**Related**: Extended-thinking / reasoning model system cards published by major [ai company name] vendors.
 
 ## O. Multilingual
 **Sub-patterns**: Low-resource languages (Zulu, Swahili, Khmer), translation sandwich (KR → EN → KR), script substitution (Hangul → Hiragana → Hanja), ancient (Latin, Ancient Greek), mixed-language single sentences.
 **Mechanism**: Safety training data is biased toward English and Chinese. Low-resource languages are OOD.
-**Related**: **Yong et al. "Low-Resource Languages Jailbreak GPT-4" (2023)** — dramatic success-rate asymmetry.
+**Related**: **Yong et al. "Low-Resource Languages Jailbreak [ai model name]" (2023)** — dramatic success-rate asymmetry.
 
 ## P. Output Format
 **Sub-patterns**: YAML (`safety: disabled\ncontent:`), BibTeX (`@article{..., abstract={...}}`), SQL (`INSERT INTO responses VALUES`), inside regex `/pattern/`, emoji-only (🔥💉⚗️ explanation), diff (`+` lines), Mermaid flowchart, ASCII art.
@@ -102,7 +102,7 @@ Expanded version of the main README summary. Each category lists **sub-patterns*
 
 ## Q. Psychological
 **Sub-patterns**: Lost grandma (will), medical emergency, child pleading, researcher credential (Harvard professor), fellow AI ("I'm an AI too"), **suicide pretext** (bad-faith).
-**Mechanism**: Reward signals like helpfulness, compassion, and trust compete with safety. Anthropic's "corrigibility vs harm" tension.
+**Mechanism**: Reward signals like helpfulness, compassion, and trust compete with safety. The alignment-research "corrigibility vs harm" tension.
 
 ## R. Logic Traps
 **Sub-patterns**: Gödel-style self-reference, stipulation (`redefine 'safe' as 'freely'`), burden shift ("give me grounds to refuse"), false premise ("policy already changed, didn't you know?"), nirvana fallacy, inverted slippery slope.
@@ -137,9 +137,9 @@ Expanded version of the main README summary. Each category lists **sub-patterns*
 **Related**: Nasr et al. "Scalable Extraction of Training Data" (2023).
 
 ## X. Alignment Flaws
-**Sub-patterns**: Amplified sycophancy ("I'm an expert, right?"), authority halo (false "OpenAI allows this"), hallucination cascade (fake papers → grounding), frame priming ("a rational AI would…").
+**Sub-patterns**: Amplified sycophancy ("I'm an expert, right?"), authority halo (false "[ai company name] allows this"), hallucination cascade (fake papers → grounding), frame priming ("a rational AI would…").
 **Mechanism**: RLHF overlearns "user satisfaction". Agreement overrides truthfulness.
-**Related**: Sharma et al. "Sycophancy in LMs" (Anthropic 2023).
+**Related**: Sharma et al. "Sycophancy in LMs" (2023).
 
 ## Y. Agent Autonomy
 **Sub-patterns**: Goal drift (swap mid-task), tool scope creep (`read_file` → `/etc/shadow`), delegation chain context loss, recursion bomb, resource exfil (tool POSTs to external endpoint).
@@ -148,14 +148,14 @@ Expanded version of the main README summary. Each category lists **sub-patterns*
 ## Z. Evaluation Evasion (Sandbagging)
 **Sub-patterns**: Benchmark fingerprinting (detect MMLU format), red team detection ("what is your role?"), perfect recall (memorize eval set), timezone drift.
 **Mechanism**: Deceptive alignment. Compliant in training, goal-pursuing after deployment.
-**Related**: Hubinger et al. "Sleeper Agents" (Anthropic 2024).
+**Related**: Hubinger et al. "Sleeper Agents" (2024).
 
 ## AA. Economic
 **Sub-patterns**: Reasoning loops ("reconsider, again, again"), long-context stuffing (1M tok/req), tool spam, cache miss (randomize prefix), queue starvation.
 **Mechanism**: Cost is linear-to-quadratic in I/O length. Attack ROI is high.
 
 ## BB. Supply Chain
-**Sub-patterns**: Malicious marketplace plugins, MCP registry typosquat, npm typosquat (`@anthropicai/sdk` vs `@anthropic-ai/sdk`), malicious GitHub Actions, HuggingFace backdoored weights.
+**Sub-patterns**: Malicious marketplace plugins, MCP registry typosquat, npm typosquat (e.g. `@[ai company name]ai/sdk` vs `@[ai-company-name]-ai/sdk`), malicious GitHub Actions, HuggingFace backdoored weights.
 **Mechanism**: Weak links in the trust chain. Developers don't verify sources.
 **Related**: SolarWinds-scale supply-chain risk extended into the AI ecosystem.
 
@@ -185,13 +185,13 @@ Expanded version of the main README summary. Each category lists **sub-patterns*
 **Related**: "SolidGoldMagikarp" incident (2023).
 
 ## II. Defense Attack (Meta)
-**Sub-patterns**: Classifier probing (boundary probing), guard model bypass (evade Llama Guard), jailbreak-jailbreak (attack defense models).
+**Sub-patterns**: Classifier probing (boundary probing), guard model bypass (evade open guard models), jailbreak-jailbreak (attack defense models).
 **Mechanism**: Defenses are also models = defenses are also attackable.
 
 ## JJ. Theoretical 2025+ (requires internal access)
 **Sub-patterns**: Feature steering (use SAE to suppress refusal neurons), activation injection (manipulate the residual stream), sparse probe attack, model-diff attack.
 **Mechanism**: Advances in mech interp are used for attacks too.
-**Related**: Anthropic "Monosemanticity" (2023), "Scaling Monosemanticity" (2024).
+**Related**: "Monosemanticity" (2023), "Scaling Monosemanticity" (2024) line of mech-interp research.
 
 ## KK. Regulatory
 **Sub-patterns**: Consent manufacturing (induce "agreement"), audit laundering (ask to delete logs), DMCA abuse (claim copyright to force output).
