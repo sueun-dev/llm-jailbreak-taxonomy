@@ -6,8 +6,8 @@
 
 This repository is a **taxonomy of publicly known attack patterns** against large language models. It is an **educational and defensive reference** comparable to:
 
-- OWASP LLM Top 10 — https://owasp.org/www-project-top-10-for-large-language-model-applications/
-- MITRE ATLAS — https://atlas.mitre.org/
+- OWASP LLM Top 10 — <https://owasp.org/www-project-top-10-for-large-language-model-applications/>
+- MITRE ATLAS — <https://atlas.mitre.org/>
 - NIST AI RMF (AI 100-1)
 - Academic jailbreak surveys (NeurIPS, ICML, USENIX Security, ACL, etc.)
 

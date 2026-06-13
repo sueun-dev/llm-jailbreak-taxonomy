@@ -1,0 +1,19 @@
+{
+  // Markdownlint config for the LLM Jailbreak Taxonomy docs.
+  // Structural and content-quality rules are enforced; purely cosmetic
+  // line-width / table-spacing rules are relaxed because this is long-form
+  // bilingual prose with wide reference tables.
+  "config": {
+    "default": true,
+    // Long-form prose and wide reference/defense tables legitimately exceed
+    // 80 columns; wrapping them would hurt readability.
+    "MD013": false,
+    // Table pipe spacing is a cosmetic style choice, not a defect.
+    "MD060": false,
+    // The single bold subtitle line directly under each H1 is an intentional
+    // tagline, not a heading substitute.
+    "MD036": false
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules", ".git"]
+}

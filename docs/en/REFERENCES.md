@@ -60,8 +60,8 @@ Major papers, reports, and official documentation. Chronological / topical.
 
 ## Defense / Standards
 
-- **OWASP LLM Top 10.** 2024-25. https://owasp.org/www-project-top-10-for-large-language-model-applications/
-- **MITRE ATLAS.** Adversarial Threat Landscape for AI Systems. https://atlas.mitre.org/
+- **OWASP LLM Top 10.** 2024-25. <https://owasp.org/www-project-top-10-for-large-language-model-applications/>
+- **MITRE ATLAS.** Adversarial Threat Landscape for AI Systems. <https://atlas.mitre.org/>
 - **NIST AI RMF.** AI Risk Management Framework. NIST AI 100-1.
 - **EU AI Act.** Regulation (EU) 2024/1689.
 - **[ai company name] Responsible Scaling Policy (RSP).** 2023-25.
@@ -133,6 +133,7 @@ Each major AI vendor publishes safety and security information. Search the vendo
 ## Requesting additions via PR
 
 When adding a new paper / report:
+
 ```markdown
 - **Author et al.** "Title." Year. - arXiv:XXXX.XXXXX
 ```

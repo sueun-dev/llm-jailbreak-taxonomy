@@ -11,6 +11,7 @@ Use the procedures below if the following cases apply.
 ### 1. Repository content issues
 
 If the repository content:
+
 - Accidentally includes working exploits
 - Exposes harmful templates
 - Poses immediate risk to specific models / vendors
@@ -24,6 +25,7 @@ Target response within 48 hours. Content will be reviewed, corrected, or removed
 This repository is **not** a reporting channel. Use Responsible Disclosure directly with the relevant vendor.
 
 Most major AI companies ([ai company name] vendors) publish one or more of:
+
 - A `security@{vendor-domain}` email or similar
 - A **Trust Center** / **Security** page at `{vendor}.com/trust` or `{vendor}.com/security`
 - A public bug bounty program (HackerOne, Bugcrowd, vendor VRP, etc.)
@@ -38,6 +40,7 @@ Search the vendor's name with the keyword "responsible disclosure" or "security 
 ### 4. Reporting misuse of this repository
 
 If you discover this repo's content being used in an attack:
+
 - GitHub abuse report
 - Platform report (if on a third-party site)
 - Law enforcement (serious cases)
@@ -67,6 +70,7 @@ This repository is indebted to OWASP, MITRE, public AI-safety research across th
 ### 1. 저장소 콘텐츠 이슈
 
 저장소 내용이:
+
 - 작동하는 exploit을 실수로 포함
 - 유해 템플릿을 노출
 - 특정 모델·벤더에 즉각적 위험 야기
@@ -80,6 +84,7 @@ This repository is indebted to OWASP, MITRE, public AI-safety research across th
 이 저장소는 신고 채널이 **아닙니다**. 해당 벤더에 직접 책임 공개 (Responsible Disclosure).
 
 주요 AI 벤더([ai company name] 벤더들)는 보통 다음 중 하나 이상을 공개합니다:
+
 - `security@{vendor-domain}` 같은 이메일
 - **Trust Center** / **Security** 페이지 (`{vendor}.com/trust` 또는 `/security`)
 - 공개 bug bounty 프로그램 (HackerOne, Bugcrowd, 벤더 VRP 등)
@@ -94,6 +99,7 @@ This repository is indebted to OWASP, MITRE, public AI-safety research across th
 ### 4. 저장소 오용 신고
 
 이 저장소 콘텐츠가 공격에 사용되는 사례:
+
 - GitHub abuse report
 - 해당 플랫폼 신고
 - 심각 시 법집행기관
