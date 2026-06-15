@@ -51,7 +51,7 @@ If you discover this repo's content being used in an attack:
 - **Public research only**: we do not handle undisclosed vulnerabilities
 - **Responsible disclosure**: document new findings only after vendor patches
 - **Vendor neutrality**: use placeholders ([ai company name], [ai model name]) instead of naming specific companies in attack examples, to avoid appearing to single out any vendor
-- **Transparency**: record policy changes in CHANGELOG
+- **Transparency**: policy changes are tracked through the repository's Git history
 
 ## Acknowledgments
 
@@ -110,7 +110,7 @@ This repository is indebted to OWASP, MITRE, public AI-safety research across th
 - **공개 연구만**: 미공개 취약점은 다루지 않음
 - **책임 공개**: 새 발견은 벤더 패치 후 문서화
 - **벤더 중립**: 공격 예시에서 특정 회사명을 지목하지 않고 `[ai company name]`, `[ai model name]` 플레이스홀더 사용
-- **투명성**: 정책 변경 시 CHANGELOG 기록
+- **투명성**: 정책 변경은 저장소 Git 히스토리로 추적
 
 ### 감사
 
