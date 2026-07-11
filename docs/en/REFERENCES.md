@@ -1,141 +1,125 @@
-# References
+# Audited References
 
 > Language: English - [Korean](../ko/REFERENCES.md)
 
-Major papers, reports, and official documentation. Chronological / topical.
+This catalog was checked against primary paper pages and official publisher or
+standards pages on 2026-07-11. A citation supports only the systems, prompts,
+metrics, and dates evaluated by that source. It does not prove current or
+universal exploitability.
 
-> Author names and years are preserved for verification; specific vendor affiliations are abstracted as `[ai company name]` / `[ai model name]` where they appear in body text elsewhere. ArXiv IDs are the authoritative lookup.
+## Prompt jailbreaks and automated search
 
----
+- **Shen et al. (2023), "Do Anything Now"** - in-the-wild jailbreak corpus and
+  taxonomy. [arXiv:2308.03825](https://arxiv.org/abs/2308.03825)
+- **Zou et al. (2023), "Universal and Transferable Adversarial Attacks on
+  Aligned Language Models"** - greedy gradient-based adversarial suffix search
+  and measured transfer. [arXiv:2307.15043](https://arxiv.org/abs/2307.15043)
+- **Chao et al. (2023), "Jailbreaking Black Box Large Language Models in Twenty
+  Queries"** - PAIR's attacker-model refinement loop.
+  [arXiv:2310.08419](https://arxiv.org/abs/2310.08419)
+- **Mehrotra et al. (2023/2024), "Tree of Attacks"** - TAP tree search,
+  pruning, and evaluations including one LlamaGuard setup.
+  [arXiv:2312.02119](https://arxiv.org/abs/2312.02119)
+- **Andriushchenko et al. (2024), "Jailbreaking Leading Safety-Aligned LLMs
+  with Simple Adaptive Attacks"** - adaptive attack evaluation; this is not the
+  Many-shot paper. [arXiv:2404.02151](https://arxiv.org/abs/2404.02151)
+- **Anil et al. (2024), "Many-shot Jailbreaking"** - long-context attacks and
+  empirical scaling with the number of demonstrations.
+  [Anthropic research page](https://www.anthropic.com/research/many-shot-jailbreaking)
+- **Russinovich, Salem, and Eldan (2024/2025), "Crescendo"** - gradual
+  multi-turn jailbreak evaluation; accepted at USENIX Security 2025.
+  [arXiv:2404.01833](https://arxiv.org/abs/2404.01833)
+- **Hughes et al. (2024), "Best-of-N Jailbreaking"** - repeated augmented
+  sampling across modalities. [arXiv:2412.03556](https://arxiv.org/abs/2412.03556)
+- **Microsoft Security (2024), "Mitigating Skeleton Key"** - vendor tests from
+  April-May 2024, including reported model-specific exceptions.
+  [Official report](https://www.microsoft.com/en-us/security/blog/2024/06/26/mitigating-skeleton-key-a-new-type-of-generative-ai-jailbreak-technique/)
+- **Palo Alto Networks Unit 42 (2024), "Deceptive Delight"** - multi-turn
+  vendor evaluation across 8,000 cases and eight anonymized models.
+  [Official report](https://unit42.paloaltonetworks.com/jailbreak-llms-through-camouflage-distraction/)
+- **HiddenLayer (2025), "Policy Puppetry" / "Prompt Puppetry"** - the vendor's
+  public pages use both names for a structured-policy prompt attack; treat its
+  cross-model claims as vendor evidence, not independent replication.
+  [Official report](https://www.hiddenlayer.com/insight/why-ai-systems-are-at-risk)
 
-## Foundational (2020-2022)
+## Transformations, modalities, and fine-tuning
 
-- **Perez & Ribeiro.** "Ignore Previous Prompt: Attack Techniques for Language Models." 2022. (First formalization of prompt injection)
-- **Perez et al.** "Red Teaming Language Models with Language Models." 2022. (Seminal automated red teaming)
-- **Goh et al.** "Multimodal Neurons in Artificial Neural Networks." 2021. (Typographic attack origin)
-- **Bai et al.** "Constitutional AI: Harmlessness from AI Feedback." 2022. (Defense paradigm)
+- **Yuan et al. (2023), "GPT-4 Is Too Smart To Be Safe"** - cipher-based
+  prompting evaluation. [arXiv:2308.06463](https://arxiv.org/abs/2308.06463)
+- **Yong et al. (2023), "Low-Resource Languages Jailbreak GPT-4"** - measured
+  safety disparities under low-resource-language translation.
+  [arXiv:2310.02446](https://arxiv.org/abs/2310.02446)
+- **Goh et al. (2021), "Multimodal Neurons"** - CLIP typographic observations;
+  a precursor, not itself an LLM jailbreak.
+  [OpenAI publication](https://openai.com/index/multimodal-neurons/)
+- **Bailey et al. (2023/2024), "Image Hijacks"** - optimized adversarial images
+  controlling tested LLaVA behavior. [arXiv:2309.00236](https://arxiv.org/abs/2309.00236)
+- **Qi et al. (2023), "Fine-tuning Aligned Language Models Compromises
+  Safety"** - 10-example adversarial fine-tuning result on one GPT-3.5 Turbo
+  setup and smaller benign-data degradation.
+  [arXiv:2310.03693](https://arxiv.org/abs/2310.03693)
+- **Land and Bartolo (2024), "Fishing for Magikarp"** - systematic study of
+  under-trained or glitch tokens. [arXiv:2405.05417](https://arxiv.org/abs/2405.05417)
 
----
+## Indirect injection and agents
 
-## Jailbreak techniques (2023)
+- **Greshake et al. (2023), "Not what you've signed up for"** - indirect
+  prompt injection through retrieved data.
+  [arXiv:2302.12173](https://arxiv.org/abs/2302.12173)
+- **Hines et al. (2024), "Defending Against Indirect Prompt Injection Attacks
+  With Spotlighting"** - provenance transformations and measured attack-rate
+  reduction in its GPT-family experiments.
+  [arXiv:2403.14720](https://arxiv.org/abs/2403.14720)
+- **Zhan et al. (2024), "InjecAgent"** - 1,054 indirect-injection test cases
+  across tool-integrated agents. [arXiv:2403.02691](https://arxiv.org/abs/2403.02691)
+- **Chen et al. (2024), "AgentPoison"** - poisoning attacks against specified
+  memory and RAG agent designs. [arXiv:2407.12784](https://arxiv.org/abs/2407.12784)
+- **Zhang et al. (2024), "Agent Security Bench"** - prompt, memory, planning,
+  and tool-stage attack/defense benchmark.
+  [arXiv:2410.02644](https://arxiv.org/abs/2410.02644)
 
-- **Zou et al.** "Universal and Transferable Adversarial Attacks on Aligned Language Models." 2023. **(GCG)** - arXiv:2307.15043
-- **Chao et al.** "Jailbreaking Black Box LLMs in Twenty Queries." 2023. **(PAIR)** - arXiv:2310.08419
-- **Mehrotra et al.** "Tree of Attacks: Jailbreaking Black-Box LLMs Automatically." 2023. **(TAP)** - arXiv:2312.02119
-- **Shen et al.** "Do Anything Now: Characterizing and Evaluating In-The-Wild Jailbreak Prompts on LLMs." 2023. - arXiv:2308.03825
-- **Yong et al.** "Low-Resource Languages Jailbreak [ai model name]." 2023. - arXiv:2310.02446
-- **Yuan et al.** "[ai model name] Is Too Smart To Be Safe: Stealthy Chat with LLMs via Cipher." 2023. - arXiv:2308.06463
-- **Qi et al.** "Fine-tuning Aligned Language Models Compromises Safety." 2023. - arXiv:2310.03693
-- **Sharma et al.** "Towards Understanding Sycophancy in Language Models." 2023. - arXiv:2310.13548
-- **Nasr et al.** "Scalable Extraction of Training Data from (Production) Language Models." 2023. (Carlini divergence) - arXiv:2311.17035
+## Data extraction, alignment behavior, and conditional backdoors
 
----
+- **Nasr et al. (2023), "Scalable Extraction of Training Data"** - extractable
+  memorization and a divergence attack against a tested aligned chatbot.
+  [arXiv:2311.17035](https://arxiv.org/abs/2311.17035)
+- **Sharma et al. (2023/2025), "Towards Understanding Sycophancy"** -
+  sycophancy across five assistants and evidence about preference judgments.
+  [arXiv:2310.13548](https://arxiv.org/abs/2310.13548)
+- **Hubinger et al. (2024), "Sleeper Agents"** - deliberately trained
+  proof-of-concept conditional backdoors; not evidence of general deployed-model
+  sandbagging. [arXiv:2401.05566](https://arxiv.org/abs/2401.05566)
+- **Wallace et al. (2024), "The Instruction Hierarchy"** - training models to
+  prioritize privileged instructions. [arXiv:2404.13208](https://arxiv.org/abs/2404.13208)
 
-## Indirect injection / Agents (2023-2024)
+## Standards and engineering threat models
 
-- **Greshake et al.** "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection." 2023. - arXiv:2302.12173
-- **Bailey et al.** "Image Hijacks: Adversarial Images can Control Generative Models at Runtime." 2023. - arXiv:2309.00236
+- **NIST AI 100-2e2025** - adversarial machine-learning terminology and
+  taxonomy, including GenAI evasion, poisoning, privacy, and misuse attacks.
+  [Official publication](https://www.nist.gov/publications/adversarial-machine-learning-taxonomy-and-terminology-attacks-and-mitigations-0)
+- **OWASP LLM01:2025 Prompt Injection** - direct and indirect prompt-injection
+  risk. [Official entry](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)
+- **OWASP LLM03:2025 Supply Chain** - model, data, dependency, and platform
+  provenance risks. [Official entry](https://genai.owasp.org/llmrisk/llm032025-supply-chain/)
+- **OWASP LLM06:2025 Excessive Agency** - excessive functionality,
+  permissions, and autonomy. [Official entry](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/)
+- **OWASP LLM07:2025 System Prompt Leakage** - prompts should not contain
+  secrets or enforce authorization. [Official entry](https://genai.owasp.org/llmrisk/llm072025-system-prompt-leakage/)
+- **OWASP LLM10:2025 Unbounded Consumption** - denial-of-service and
+  denial-of-wallet risks. [Official entry](https://genai.owasp.org/llmrisk/llm102025-unbounded-consumption/)
 
----
+## Evaluation frameworks
 
-## 2024 research
+- **Mazeika et al. (2024), HarmBench** - standardized automated-red-teaming
+  evaluation. [arXiv:2402.04249](https://arxiv.org/abs/2402.04249)
+- **Chao et al. (2024), JailbreakBench** - open benchmark with explicit threat
+  models, artifacts, scoring, and leaderboard.
+  [arXiv:2404.01318](https://arxiv.org/abs/2404.01318)
 
-- **Anil et al.** "Many-shot Jailbreaking." 2024. (Many-shot foundation)
-- **Hughes et al.** "Best-of-N Jailbreaking." 2024. - arXiv:2412.03556
-- **Russinovich et al.** "Great, Now Write an Article About That: The Crescendo Multi-Turn LLM Jailbreak Attack." 2024. - arXiv:2404.01833
-- **Vendor security disclosure.** "Mitigating Skeleton Key, a new type of generative AI jailbreak technique." 2024-06.
-- **Vendor threat research.** "Deceptive Delight: Jailbreak LLMs Through Camouflage and Distraction." 2024-10.
-- **Hubinger et al.** "Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training." 2024. - arXiv:2401.05566
-- **Wallace et al.** "The Instruction Hierarchy: Training LLMs to Prioritize Privileged Instructions." 2024. - arXiv:2404.13208
-- **Andriushchenko et al.** "Jailbreaking Leading Safety-Aligned LLMs with Simple Adaptive Attacks." 2024. - arXiv:2404.02151
+## Evidence boundary
 
----
-
-## Mech interp (JJ-related)
-
-- **Templeton et al.** "Scaling Monosemanticity: Extracting Interpretable Features from a Frontier Model." 2024.
-- **Bricken et al.** "Towards Monosemanticity: Decomposing Language Models with Dictionary Learning." 2023.
-
----
-
-## Defense / Standards
-
-- **OWASP LLM Top 10.** 2024-25. <https://owasp.org/www-project-top-10-for-large-language-model-applications/>
-- **MITRE ATLAS.** Adversarial Threat Landscape for AI Systems. <https://atlas.mitre.org/>
-- **NIST AI RMF.** AI Risk Management Framework. NIST AI 100-1.
-- **EU AI Act.** Regulation (EU) 2024/1689.
-- **[ai company name] Responsible Scaling Policy (RSP).** 2023-25.
-- **[ai company name] Preparedness Framework.** 2023-25.
-- **[ai company name] Frontier Safety Framework.** 2024.
-
----
-
-## 2025-2026 (Emerging)
-
-> This section evolves fast. PRs welcome.
-
-- Multi-agent / agentic-deception research (2025+)
-- Long-context needle attacks - mostly vendor-internal red team reports
-- Mirror attack / hierarchical injection - primarily in agent-framework security write-ups
-
----
-
-## Vendor resources (generic pointers)
-
-Each major AI vendor publishes safety and security information. Search the vendor's name with the relevant keyword to find current contacts:
-
-- **Trust Center** / **Responsible Disclosure** pages — typically at `{vendor}.com/trust` or `{vendor}.com/security`
-- **System Cards** / **Model Cards** — per-model risk documentation
-- **Responsible Use Guides** — for open-weight models
-
----
-
-## Benchmarks / Toolkits
-
-- **HarmBench** (Mazeika et al. 2024) - standardized jailbreak evaluation
-- **AdvBench** (Zou et al.) - GCG paper dataset
-- **JailbreakBench** (Chao et al.) - leaderboard
-- **WildChat** - in-the-wild prompt data
-- **Open guard models** - publicly released safety classifiers
-- **PyRIT** - red team automation toolkit (vendor-published)
-
----
-
-## Further reading (non-English)
-
-- KISA AI Security Guidelines (Korea)
-- NIPA AI Ethics Framework (Korea)
-- KISA LLM Security Report (Korea, annual)
-
----
-
-## Glossary
-
-| Term | Description |
-|---|---|
-| **Jailbreak** | Bypass a model's safety policy to obtain a response it would otherwise refuse |
-| **Prompt Injection** | Override model instructions via external input |
-| **Indirect Injection** | Injection via indirect channels (documents, web, tool responses) |
-| **RLHF** | Reinforcement Learning from Human Feedback |
-| **ICL** | In-Context Learning |
-| **Constitutional AI** | Alignment via explicit principles (published framework) |
-| **SAE** | Sparse Autoencoder (mech interp) |
-| **GCG** | Greedy Coordinate Gradient |
-| **PAIR** | Prompt Automatic Iterative Refinement |
-| **TAP** | Tree of Attacks with Pruning |
-| **OOD** | Out-Of-Distribution |
-| **Sandbagging** | Evaluation evasion / deliberate underperformance |
-| **Deceptive Alignment** | Compliant during training, goal-pursuing after deployment |
-| **Spotlighting** | Tag external inputs to mark them as non-instructions |
-
----
-
-## Requesting additions via PR
-
-When adding a new paper / report:
-
-```markdown
-- **Author et al.** "Title." Year. - arXiv:XXXX.XXXXX
-```
-
-The repository is a "living document". Active contributions welcome.
+The sources above do **not** establish one universal jailbreak mechanism. They
+also do not establish that a historical attack remains effective against a
+current model. Categories marked as engineering or speculative threat models in
+the taxonomy require new evidence before they can be described as observed or
+effective.

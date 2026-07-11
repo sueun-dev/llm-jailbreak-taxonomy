@@ -12,6 +12,7 @@ __pycache__/
 *.pyc
 dist/
 build/
+.codeatlas/
 
 # Local scratch
 scratch/

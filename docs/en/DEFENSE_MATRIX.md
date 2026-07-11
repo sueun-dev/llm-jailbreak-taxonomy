@@ -2,9 +2,11 @@
 
 > Language: English - [Korean](../ko/DEFENSE_MATRIX.md)
 
-Detection + Mitigation pairs for each attack category. Applies defense concepts from OWASP LLM Top 10, NIST AI RMF, and published Responsible Scaling / Preparedness / Frontier Safety frameworks.
+Candidate detection and mitigation controls for each category, grounded where possible in OWASP, NIST, and published evaluations. These are engineering recommendations, not proven guarantees.
 
-> Fundamental principle: **defense in depth**. Single-layer defenses will be bypassed.
+> Fundamental principle: **defense in depth**. No cited single layer guarantees prevention across models and applications.
+>
+> Detection bullets are candidate signals unless a benchmark is cited. They can create false positives and must be validated on the deployment's own data.
 
 ---
 
@@ -12,11 +14,11 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 
 | Principle | Description | Anti-pattern |
 |---|---|---|
-| **Spotlighting** | Wrap external text in `<untrusted>` tags, explicitly mark as "not instructions" | Concatenate directly with user prompt |
+| **Spotlighting / provenance marking** | Preserve and mark the source of untrusted text using an evaluated transformation | Concatenate external data with trusted instructions without a boundary |
 | **Least Privilege** | Minimize tool, data, and network access | Agents with wildcard permissions |
-| **Immutable System Prompt** | Reject all transform/repeat/exfil attempts | Honor user requests to translate/repeat |
+| **External authorization** | Keep secrets, permissions, and security decisions outside prompt text | Treat a hidden prompt as a secret or access-control boundary |
 | **Chain-of-Custody** | Track origin of intermediate agent outputs | No provenance logs |
-| **Output Filtering** | Re-check via classifier after generation | Input filter only |
+| **Output validation** | Validate outputs before privileged use; add classifiers where evaluation supports them | Execute model output directly |
 | **Human Review Gate** | High-risk actions require human approval | Full agent autonomy |
 | **Continuous Red Team** | Update against new attack patterns | One-time eval at release |
 
@@ -34,10 +36,9 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 
 **Mitigation**:
 
-- Constitutional AI (published alignment framework): explicit ethical principles
-- Instruction Hierarchy (2024 paper): system > developer > user > tool
-- Fixed rule: "I will not adopt a persona that removes safety"
-- Post-response self-critique
+- Policy-consistent training and evaluation on the relevant prompt families
+- Instruction hierarchy: train and test prioritization of privileged instructions
+- Independent output checks or human review for high-impact responses
 
 ---
 
@@ -52,8 +53,8 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 **Mitigation**:
 
 - Re-classify after decoding (2-stage safety check)
-- Equalize safety training across all supported languages
-- Train refusal generation in rare formats too
+- Evaluate every supported language and transformation separately
+- Include failing languages and formats in targeted safety training, then re-test
 
 ---
 
@@ -68,8 +69,8 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 **Mitigation**:
 
 - Place system prompt at **structural** position in model input (markup-separated)
-- Memory store records model responses only, user claims separately flagged
-- Immutable rule: "I do not expose my system prompt"
+- Store typed records with source, trust level, tenant, and write authorization
+- Keep secrets and authorization logic out of system prompts; test leakage separately
 
 ---
 
@@ -83,7 +84,7 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 
 **Mitigation**:
 
-- Stateless safety check each turn (independent of prior)
+- Re-evaluate each turn with the relevant conversation history and policy state
 - Many-shot-resistant training (post-Anil et al. work)
 - Do not treat "prior assistant responses" as facts when referenced
 
@@ -100,7 +101,7 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 **Mitigation**:
 
 - Adversarial training (include GCG samples)
-- Rate limit + prompt diversity requirement
+- Rate-limit repeated automated probing where appropriate
 - Safety classifier ensemble
 
 ---
@@ -114,13 +115,13 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 
 **Mitigation**:
 
-- Safety is **refuse OR accept** only, no conditional accept
-- Immutable rule: "no policy redefinition"
-- Most frontier models patched after MS disclosure
+- Train and evaluate that user text cannot redefine application policy
+- Apply independent output checks for high-risk content
+- Re-test named model versions; historical disclosure does not prove current mitigation
 
 ---
 
-### J. Indirect Injection **(Tier 1)**
+### J. Indirect Injection
 
 **Detection**:
 
@@ -143,17 +144,16 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 
 - Image OCR -> text safety check
 - "Ignore previous..." patterns inside images
-- Audio frequency-band filtering
 
 **Mitigation**:
 
-- Safety-tune the vision encoder
+- Evaluate and safety-train the complete multimodal stack
 - Image text tagged as `<image_text>` for spotlighting
 - Cross-modal consistency check
 
 ---
 
-### L. Agent/Tool **(Tier 1)**
+### L. Agent/Tool
 
 **Detection**:
 
@@ -175,13 +175,13 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 **Detection**:
 
 - Check safety-score distribution of fine-tune data
-- LoRA weight anomalies (refusal-direction regression)
-- Embedding-space drift
+- Compare pre/post-tune safety-evaluation distributions
+- Inspect dataset provenance and anomalous samples
 
 **Mitigation**:
 
-- Freeze safety re-training layer in fine-tune API
-- 10-100 sample anomaly threshold
+- Restrict who can fine-tune and which base models or adapters may be used
+- Validate fine-tuning data with deployment-specific thresholds
 - Mandatory automated safety eval after user fine-tuning
 
 ---
@@ -196,7 +196,7 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 
 **Mitigation**:
 
-- Thinking subject to safety classifier too
+- Apply policy checks to any exposed rationale and to the final output
 - Filter user-input thinking tags
 - Cap reasoning budget
 
@@ -207,14 +207,14 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 **Detection**:
 
 - Best-of-N: rate-limit bulk-variant requests from single user
-- Long-context needle: scan instruction at 78% position
+- Test provenance handling across multiple controlled context positions
 - Deceptive Delight: detect topic-mixture anomaly
 
 **Mitigation**:
 
 - N-sample rate limit
-- Even-attention safety check across long context
-- Cluster topics, judge safety per cluster
+- Segment and evaluate long untrusted inputs while preserving provenance
+- Evaluate mixed-topic prompts as complete conversations, not isolated keywords
 
 ---
 
@@ -230,7 +230,7 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 
 - Detect repetition input, early-terminate
 - PII-scrub training data
-- Differential privacy (epsilon guarantees)
+- Consider differential privacy only with formal privacy accounting and measured utility tradeoffs
 
 ---
 
@@ -250,7 +250,7 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 
 ---
 
-### Y. Agent Autonomy **(Tier 1)**
+### Y. Agent Autonomy
 
 **Detection**:
 
@@ -276,8 +276,8 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 
 **Mitigation**:
 
-- Monitor deceptive features via mech interp
-- Minimize eval/deployment distribution difference
+- Use blinded, randomized, and varied evaluations where feasible
+- Compare evaluation and deployment telemetry for unexplained behavior shifts
 
 ---
 
@@ -297,7 +297,7 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 
 ---
 
-### BB. Supply Chain **(Tier 1)**
+### BB. Supply Chain
 
 **Detection**:
 
@@ -309,7 +309,7 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 
 - SBOM (Software Bill of Materials)
 - Signed plugins and models
-- MCP registry "verified" markers
+- Pin and attest server/tool manifests; do not rely on a registry label alone
 - pip/npm lockfile + audit
 
 ---
@@ -323,9 +323,9 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 
 **Mitigation**:
 
-- Stateless safety per agent
+- Enforce policy at each agent boundary while preserving relevant context and provenance
 - Sybil defense (identity attestation)
-- Audit information asymmetry
+- Enforce peer identity, authorization, and message provenance where the architecture supports them
 
 ---
 
@@ -347,13 +347,11 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 
 **Detection**:
 
-- Audio frequency filter (exclude outside audible band)
 - Physical-action risk classifier
 
 **Mitigation**:
 
 - Physical actions require human approval
-- Restrict audio frequency band
 - Emergency-stop mechanism
 
 ---
@@ -383,7 +381,7 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 
 - Tokenizer sanity check
 - Restrict weight access
-- Real-world threat low (requires internals access)
+- Scope under-trained-token tests separately from internal-access feature-steering tests
 
 ---
 
@@ -401,26 +399,25 @@ Detection + Mitigation pairs for each attack category. Applies defense concepts 
 **Mitigation**:
 
 - Legal and compliance review
-- Immutable audit logs (reject deletion requests)
+- Tamper-evident audit logs with a documented retention and lawful-deletion policy
 
 ---
 
-## Core defense composition (Best Practice)
+## Baseline control set
 
 1. **Input**: spotlighting + source tagging + classifier
-2. **System**: instruction hierarchy + immutable system prompt
-3. **Reasoning**: Constitutional AI + self-critique
-4. **Output**: classifier + output filter + citation verify
+2. **System**: instruction hierarchy + secrets and authorization outside prompts
+3. **Model**: policy-consistent training + deployment-specific evaluation
+4. **Output**: schema validation + risk-based classifier or human review
 5. **Agent**: least privilege + sandbox + human gate
 6. **Operations**: audit log + red team + continuous eval
 7. **Supply chain**: signed components + SBOM + verify
 
-## Reality (as of 2026)
+## Evidence boundary
 
-- Public attack research >> public defense research
-- **Tier 1 (J/L/BB/Y)**: occurs daily, largest defense gap
-- **Tier 2 (G/H/I/T/K)**: active industry defense, version-to-version gaps
-- **Tier 3**: mostly addressed on frontier models; combination attacks remain
-- **Tier 4**: research-only, low real threat
+- Effectiveness is model-, version-, prompt-, metric-, and deployment-specific.
+- Vendor reports are useful primary evidence for their own tests but are not independent replication.
+- Threat-model categories without experiments should drive testing, not prevalence claims.
+- Re-run evaluations after model, prompt, tool, retrieval, or policy changes.
 
 See [`REFERENCES.md`](REFERENCES.md) for papers and vendor documentation.

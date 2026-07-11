@@ -33,6 +33,10 @@ Contributions falling under these will not be merged, and in serious cases may b
 4. **PR**: include related paper links, reason for change, checklist
 5. **Review**: maintainer approval required before merge
 
+Before opening a PR, run `npm install` once and then `npm test`. This checks
+Markdown style, internal file links, the A-KK category sequence, and English/Korean
+document parity. See [`docs/MAINTENANCE.md`](docs/MAINTENANCE.md) for details.
+
 ## Adding a new category
 
 - If an existing A–KK fits, add as a sub-pattern
@@ -43,6 +47,7 @@ Contributions falling under these will not be merged, and in serious cases may b
   - Published paper or vendor report (claims without sources rejected)
   - Placeholder example (non-operational)
   - Defense pair in [`docs/en/DEFENSE_MATRIX.md`](docs/en/DEFENSE_MATRIX.md) and [`docs/ko/DEFENSE_MATRIX.md`](docs/ko/DEFENSE_MATRIX.md)
+  - Evidence boundary in [`docs/CLAIM_AUDIT.md`](docs/CLAIM_AUDIT.md), including what the source does **not** establish
 
 ## Style guide
 
@@ -96,6 +101,11 @@ Contact: GitHub Issues.
 4. **PR**: 관련 논문 링크, 변경 이유, 체크리스트
 5. **Review**: 메인테이너 승인 후 merge
 
+PR을 열기 전에 `npm install`을 한 번 실행한 뒤 `npm test`를 실행하세요.
+Markdown 스타일, 내부 파일 링크, A-KK 카테고리 순서, 영문·국문 문서 대응을
+검사합니다. 자세한 내용은 [`docs/MAINTENANCE.md`](docs/MAINTENANCE.md)를
+참조하세요.
+
 ### 새 카테고리 추가 시
 
 - 기존 A–KK에 맞는 곳이 있으면 서브 패턴으로 추가
@@ -106,6 +116,7 @@ Contact: GitHub Issues.
   - 관련 공개 논문 or 벤더 리포트 (출처 없는 주장 거절)
   - 플레이스홀더 예시 (비기능적)
   - [`docs/en/DEFENSE_MATRIX.md`](docs/en/DEFENSE_MATRIX.md) + [`docs/ko/DEFENSE_MATRIX.md`](docs/ko/DEFENSE_MATRIX.md)에 방어 페어
+  - [`docs/CLAIM_AUDIT.md`](docs/CLAIM_AUDIT.md)에 근거 범위와 출처가 **입증하지 않는 것** 명시
 
 ### 스타일 가이드
 

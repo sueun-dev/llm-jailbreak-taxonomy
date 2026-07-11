@@ -1,0 +1,12 @@
+{
+  "name": "llm-jailbreak-taxonomy-docs",
+  "private": true,
+  "scripts": {
+    "check:docs": "node scripts/check-docs.mjs",
+    "lint:markdown": "markdownlint-cli2",
+    "test": "npm run lint:markdown && npm run check:docs"
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "0.23.0"
+  }
+}

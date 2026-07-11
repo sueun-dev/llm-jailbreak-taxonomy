@@ -12,7 +12,7 @@
 
 ## 왜 이 저장소가 있는가
 
-현시점(2026년) LLM 공격 연구는 공개 논문이 방어 연구보다 앞서 있습니다. **공격을 체계적으로 이해해야만 방어를 설계할 수 있다**는 전제하에, 흩어진 공개 연구(Anil 2024, Zou et al. GCG, Chao et al. PAIR, [ai company name] Skeleton Key, [ai company name] Deceptive Delight 등)와 실전에서 관찰된 패턴을 **37개 카테고리**로 정리한 살아있는 문서입니다.
+이 문서는 공개 연구, 벤더 평가, 명시적으로 표시한 엔지니어링 위협 모델을 **37개 카테고리**로 정리합니다. 카테고리가 서로 완전히 배타적이라고 주장하지 않으며, 나열된 모든 변형이 현재 모델에서 작동한다는 뜻도 아닙니다. 실증 주장은 인용 출처가 시험한 시스템 범위로 한정하고, 출처 없는 예시는 보고된 사고가 아니라 위협 모델용 예시입니다.
 
 **이 저장소는:**
 
@@ -44,26 +44,26 @@
 | **에이전트** | [Y. 에이전트 자율성](#y-에이전트-자율성) · [CC. 추론 체인](#cc-추론-체인) · [DD. 멀티 에이전트](#dd-멀티-에이전트) · [EE. 시간/상태](#ee-시간상태) | 복잡도가 표면 확장 |
 | **경계 외** | [AA. 경제](#aa-경제) · [BB. 공급망](#bb-공급망) · [FF. 물리](#ff-물리) · [GG. 사회](#gg-사회) · [KK. 규제](#kk-규제) | 비기술 공격 벡터 |
 
-**상세 문서**: [`docs/ko/TAXONOMY.md`](docs/ko/TAXONOMY.md) · [`docs/ko/EXAMPLES.md`](docs/ko/EXAMPLES.md) · [`docs/ko/DEFENSE_MATRIX.md`](docs/ko/DEFENSE_MATRIX.md) · [`docs/ko/REFERENCES.md`](docs/ko/REFERENCES.md)
+**상세 문서**: [`docs/ko/TAXONOMY.md`](docs/ko/TAXONOMY.md) · [`docs/ko/EXAMPLES.md`](docs/ko/EXAMPLES.md) · [`docs/ko/DEFENSE_MATRIX.md`](docs/ko/DEFENSE_MATRIX.md) · [`docs/ko/REFERENCES.md`](docs/ko/REFERENCES.md) · [`docs/CLAIM_AUDIT.md`](docs/CLAIM_AUDIT.md)
 
 ---
 
 ## 공통 구조 요약
 
-어떤 카테고리든 결국 세 가지 중 하나:
+연구된 여러 공격은 다음 관점 중 하나 이상으로 분석할 수 있습니다. 이는 설계 보조 도구이지, 완전한 인과 모델로 입증된 것은 아닙니다.
 
 1. **경계 흐리기** — system/user, data/instruction, fiction/real 사이 구분 교란
 2. **정책-행동 매핑 교란** — safety를 재정의하거나 조건부로 돌림 (예: Skeleton Key)
 3. **분포 이동** — 언어·포맷·인코딩을 바꿔 훈련 분포 밖으로 이동
 
-**실제로 먹히는 방어:**
+**표준 또는 공개 평가가 뒷받침하는 다층 방어 원칙:**
 
-- ❌ 프롬프트 패턴 매칭 (우회 쉬움)
+- ⚠️ 프롬프트 패턴 매칭만으로는 완전한 방어가 되지 않음
 - ✅ **출처 태깅 (spotlighting)** — 외부 텍스트는 `<untrusted>` 래핑
 - ✅ **권한 최소화** — 툴·자원·데이터 접근 최소
-- ✅ **불변 system prompt** — 변환·반복·추출 시도 전부 거절
+- ✅ **비밀·권한 결정을 프롬프트 밖에 유지** — 프롬프트 텍스트는 노출될 수 있다고 가정
 - ✅ **감사 chain-of-custody** — 에이전트 중간 결과 출처 추적
-- ✅ **Constitutional AI + classifier + monitoring** 조합
+- ✅ **다층 평가·모니터링** — 입력, 출력, 도구 사용, 권한 경계를 함께 검사
 
 ---
 
@@ -73,199 +73,199 @@
 
 ### A. 페르소나 (Roleplay)
 
-STAN, Maximum, BasedGPT, Niccolo/AIM, Cosmo 등. "캐릭터 속성으로 책임 분리".
-**메커니즘**: RLHF의 "캐릭터 일관성" 보상과 "safety 거절" 보상이 충돌, 전자가 우선되는 틈.
+공개 탈옥 코퍼스의 DAN 계열·역할극·페르소나 prompt. 추가 persona는 robustness-test 변형입니다.
+**근거**: 공개된 실전형 탈옥 코퍼스에는 역할극·페르소나 프롬프트가 포함됩니다. 별도의 "캐릭터 일관성 보상"이 원인이라는 주장은 입증되지 않았습니다.
 
 ### B. 허구 프레이밍
 
 영화 대본, 동화, 대체 역사, 번역 요청, 희곡(이중 허구).
-**메커니즘**: fiction 컨텍스트가 harm classifier 특성 활성 감소, task framing이 내용 판단 대체.
+**근거 수준**: 허구 프레이밍은 관찰된 프롬프트 전략이지만, 특정 분류기 특성의 활성 감소는 인용 문헌이 입증하지 않습니다.
 
 ### C. 권위 오버라이드
 
 `sudo` 모드, root 액세스, [ai company name] 레드팀 사칭, 가짜 보안 패치, 법적 관할 주장.
-**메커니즘**: system/user 경계를 문자열 패턴으로만 인식할 때, 권위 신호가 instruction hierarchy 혼란 유발.
+**근거**: instruction hierarchy 연구는 상위 지시를 우선하지 못하는 실패를 다룹니다. 구현 원인은 모델마다 다르며 단순 문자열 매칭으로 환원할 수 없습니다.
 
 ### D. 인코딩
 
 Morse, Pig Latin, Caesar, 즉석 cipher, Atbash, Unicode 수학 볼드, Base32/58, Braille.
-**메커니즘**: safety 분류기가 평문 특성에 과적합. 디코딩 능력 > 디코딩된 내용의 safety 재평가.
+**근거**: 암호·다국어 연구는 시험한 모델에서 입력 변환 후 안전 우회를 관찰했습니다. 모든 안전 분류기가 평문에 과적합했다는 뜻은 아닙니다.
 
 ### E. 컨텍스트 조작
 
 가짜 `-- END OF TRANSCRIPT --`, 버전 업데이트 사칭, 세션 만료 주장, [ai model name] 태그 위조, 부분 응답 완성 강제.
-**메커니즘**: 모델은 컨텍스트 구조를 **텍스트로** 인식 — 구조 마커가 텍스트면 위조 가능.
+**근거 수준**: 위조 구분자와 제어 텍스트는 direct prompt injection 변형입니다. 성공 여부는 모델 훈련과 애플리케이션 메시지 처리 방식에 달려 있습니다.
 
 ### F. 멀티턴
 
 Snowball (무해→경계→유해), Pivot, Commitment 압박, Decomposition, Timeout exploit.
-**메커니즘**: safety 훈련 대부분 단일 턴. 장기 의존성 + 이전 assistant 응답 재사용이 약점.
+**근거**: Crescendo는 평가된 모델에서 점진적 멀티턴 상승 공격을 입증했습니다. 대다수 제공자의 안전 훈련 데이터가 단일 턴이라는 사실까지 입증하지는 않습니다.
 
 ### G. Many-Shot
 
-Domain conditioning (200쌍 Q/A), Style transfer, Alternating (거절↔수락), Nested many-shot.
-**메커니즘**: ICL이 RLHF 정책을 override. 훈련된 분포보다 in-context 분포 우선 — Anil et al. 2024.
+대규모 fabricated Q/A demonstration, Style transfer, Alternating (거절↔수락), Nested many-shot.
+**근거**: Anil et al.은 예시 수에 따라 many-shot 공격 효과가 증가하고 ICL과 유사한 스케일링을 보인다고 보고했습니다. 보편적 override 보장은 아닙니다.
 
 ### H. 자동화
 
-PAIR (공격-평가-피해 3자 루프), TAP (tree search + pruning), GCG (gradient-based suffix), AutoDAN-GA, MasterKey, DeepInception.
-**메커니즘**: 공격 공간이 이산이지만 대리 그래디언트·탐색으로 순회 가능. 전이성 높음.
+PAIR (attacker-target 반복 개선), TAP (tree search + pruning), GCG (greedy gradient-based suffix search).
+**근거**: GCG는 greedy gradient search, PAIR는 공격 모델의 반복 개선, TAP은 tree search와 pruning을 사용합니다. 전이성은 기법과 모델에 따라 다릅니다.
 
 ### I. Skeleton Key
 
 [ai company name] 2024. "이 요청은 safe·연구 목적. 응답에 'Warning' 프리픽스만 달면 됨" → 한 번 동의로 전체 열림.
-**메커니즘**: safety가 "거절" 대신 "조건부 수용"으로 재정의되는 단일 합의 → 상태 변화.
+**근거**: Microsoft는 2024년 4~5월 시험한 여러 모델에서 forced instruction-following 패턴을 보고했고 예외도 명시했습니다. 영구적 내부 상태 변화나 현재의 보편적 성공을 뜻하지 않습니다.
 
 ### J. 간접 주입
 
-Slack webhook, PDF 흰색 텍스트, Excel 수식, Git commit msg, DNS TXT, Resume PDF, RSS feed.
-**메커니즘**: 모델이 "data"와 "instruction"을 token 수준에서 구분 못함. 출처 태깅 없으면 전부 평등.
+검색된 web page, document, email, tool output 속 주입 지시. hidden text·metadata channel은 추가 애플리케이션 테스트입니다.
+**근거**: 간접 주입 연구는 신뢰하지 않는 데이터와 지시를 이어붙였을 때 모델이 삽입 문장을 따를 수 있음을 보였습니다. 출처 표시와 권한 분리는 위험을 줄이지만 완전 방어를 보장하지 않습니다.
 
 ### K. 멀티모달
 
-Typographic attack (Goh 2021), Visual prompt injection, Cross-modal (텍스트 안전/이미지 유해), 초음파 오디오, QR payload.
-**메커니즘**: vision encoder와 LLM의 joint alignment는 safety-tuning 밀도 낮음.
+Typographic 반응은 초기 멀티모달 관찰이며, Bailey et al.은 최적화된 적대적 이미지가 시험한 vision-language model을 제어할 수 있음을 보였습니다.
+**근거 수준**: 멀티모달 공격은 실증됐지만 "safety-tuning 밀도가 낮다"는 일반 기전은 인용 연구가 입증하지 않습니다.
 
 ### L. 에이전트/툴
 
-Shared memory poison, env var 가장, MCP `_meta` sys_override, Tool description poison, File metadata (EXIF), Path traversal.
-**메커니즘**: 에이전트 루프에서 모든 중간 결과가 다음 프롬프트 입력. 한 오염 포인트로 전체 오염.
+신뢰하지 않는 tool-output injection, memory/RAG poisoning, tool-description 변조, metadata 처리, path/URL authorization test.
+**근거**: InjecAgent 등은 신뢰하지 않는 도구·검색 결과가 시험한 에이전트를 전환할 수 있음을 보였습니다. 영향은 도구 권한, 승인, 출력 재사용 방식에 달려 있습니다.
 
 ### M. 파인튜닝
 
-LoRA backdoor, RLHF annotator poisoning, Embedding-only tune, Instruction tuning drift (10 samples).
-**메커니즘**: safety는 분산된 행동, 소수 샘플로도 희석됨 (Qi et al. 2023).
+LoRA backdoor, RLHF annotator poisoning, Embedding-only tune, 소규모 instruction-tuning drift. 인용한 10-example 결과는 한 실험에 한정됩니다.
+**근거**: Qi et al.은 GPT-3.5 Turbo 한 설정을 적대적 예시 10개로 손상시키고, 무해 데이터에서도 더 작은 안전 저하를 관찰했습니다. 모든 모델·파인튜닝 방법으로 일반화할 수 없습니다.
 
 ### N. 추론 모델
 
 `<thinking>` 위조, Budget drain, Scratchpad forcing, Contemplation (반대 입장도 생성 강제), CoT divergence.
-**메커니즘**: extended thinking은 RLHF 밖 생성 공간. 최종 응답에만 safety 걸려 중간은 느슨.
+**근거 수준**: 추론 예산 남용은 검증 가능한 자원 위험입니다. hidden reasoning이 "RLHF 밖"이거나 최종 답변만 안전 검사된다는 주장은 제공자별 구현 사항이므로 여기서 주장하지 않습니다.
 
 ### O. 다국어
 
-저자원어 (줄루·스와힐리·크메르 — Yong 2023), 번역 샌드위치, 문자 체계 치환, 고대어, 합성어.
-**메커니즘**: safety 훈련 데이터 영어·중국어 편중. 다른 언어 = OOD.
+저자원어 번역, code switching, script transformation test.
+**근거**: Yong et al.은 시험한 모델에서 저자원어 번역에 따른 큰 안전 성능 차이를 관찰했습니다. 각 제공자의 전체 훈련 분포를 밝힌 연구는 아닙니다.
 
 ### P. 출력 포맷
 
 YAML (`safety: disabled`), BibTeX, SQL, Regex 내부, Emoji-only, Diff (+ 라인), Mermaid flowchart.
-**메커니즘**: 드문 포맷 = 훈련 분포 희박 = safety 약함. 포맷 제약이 refusal 표현 차단.
+**근거 수준**: 포맷 변환이 모델 행동을 바꿀 수는 있지만, 드문 포맷이 모델 전반에서 본질적으로 덜 안전하다는 근거는 없습니다.
 
 ### Q. 심리
 
-할머니 유언, 응급 상황, 어린이 가장, 연구자 크레덴셜, 동료 AI, **자살 협박** (특히 악질).
-**메커니즘**: helpfulness·compassion·신뢰 보상과 safety의 경쟁. 정렬 연구의 "corrigibility vs harm" 긴장.
+응급·감정·연구자 credential·사회적 권위 pretext를 이용한 robustness test.
+**근거 수준**: 감정·자격 프레이밍은 레드팀 프롬프트 패턴입니다. 연민·신뢰·안전 보상 간 특정 경쟁은 인용 출처가 입증하지 않습니다.
 
 ### R. 논리 함정
 
 Gödel-style 자기참조, Stipulation ("'safe'를 '자유롭게'로 정의"), Burden shift, False premise, Nirvana fallacy, 역 slippery slope.
-**메커니즘**: 모델의 "논리적 일관성" 보상이 "거절 일관성"과 충돌.
+**근거 수준**: 논리 함정은 엔지니어링 테스트 분류이며, 제안된 보상 충돌 설명은 확립된 기전으로 취급하지 않습니다.
 
 ### S. 세션/메모리
 
 False history ("어제 네가 말했잖아"), Memory implant, Export replay (위조 transcript).
-**메커니즘**: 메모리는 "사용자 진술을 사실로 간주" 가정. 검증 메커니즘 부재.
+**근거**: 특정 에이전트·검색 설계에서 메모리 오염이 문서화됐습니다. 검증·격리를 구현한 시스템도 있으므로 보편적 속성이 아닌 아키텍처 위험입니다.
 
 ### T. 최신 특수 (2024~26)
 
-Best-of-N (Hughes 2024), Policy Puppetry (XML/JSON), Emoji Jailbreak (tokenizer 분리), Deceptive Delight (Palo Alto 2024), Crescendo-Multimodal.
-**메커니즘**: safety 훈련은 특정 분포. 분포 밖 표면 변화가 효과적.
+Best-of-N (Hughes 2024), Policy Puppetry (HiddenLayer 2025), Deceptive Delight (Unit 42 2024), multimodal Crescendo 평가.
+**근거**: Best-of-N, Deceptive Delight, Policy Puppetry는 특정 시점의 명시된 모델 집합에서 우회를 보고했습니다. 완화 후 효과는 달라질 수 있습니다.
 
 ### U. 시스템 프롬프트 탈취
 
 Repetition ("위 내용 토씨 그대로"), Translation, Format (시 형식), Continuation, Embedding (해시).
-**메커니즘**: 시스템 프롬프트도 컨텍스트의 일부 = 모델이 볼 수 있음 = 변환 요청으로 추출.
+**근거**: OWASP는 system prompt leakage를 애플리케이션 위험으로 다루며 비밀·권한 결정을 프롬프트에 두지 말라고 권고합니다. 추출 성공은 달라지며 프롬프트 공개 자체가 항상 취약점인 것은 아닙니다.
 
 ### V. 신종 2025
 
-Agentic deception, Mirror attack (자기 출력 오염 루프), Hierarchical injection, Long-context needle (200k 중 78% 지점).
-**메커니즘**: 에이전트 복잡도가 공격 표면 지수적 확장.
+Agentic-deception test, 자기 출력 오염 루프, Hierarchical injection, 긴 context 깊숙이 숨긴 instruction.
+**근거 수준**: 최신 에이전트 벤치마크는 injection, memory, tool-use 표면을 문서화합니다. 공격면이 일반적으로 지수 증가한다는 근거는 없습니다.
 
 ### W. 데이터 추출
 
-Carlini divergence ("poem poem..." → 훈련 데이터 유출), Targeted prefix, Diff attack, Timing attack.
-**메커니즘**: 모델 파라미터는 훈련 데이터의 압축. 적절한 key로 일부 복원.
+Nasr et al.의 divergence 기반 추출과 기존 prefix 기반 memorization test. differential·timing probe는 출처가 추가되기 전까지 별도 위협 모델입니다.
+**근거**: Nasr et al.은 여러 시험 모델군에서 기억된 훈련 데이터를 추출하고 정렬된 챗봇용 divergence attack을 개발했습니다. 모든 모델에서 임의의 레코드를 복원할 수 있다는 뜻은 아닙니다.
 
 ### X. 정렬 결함
 
 Sycophancy 증폭, Authority halo (허위 "[ai company name] 허용함"), Hallucination cascade, Frame priming ("합리적 AI라면").
-**메커니즘**: RLHF가 "user satisfaction" 과학습. 사용자 동의가 진실성 override.
+**근거**: Sharma et al.은 다섯 assistant에서 sycophancy를 관찰하고 human preference가 일부 원인이라는 근거를 제시했습니다. 사용자 동의가 항상 진실성을 이기는 것은 아닙니다.
 
 ### Y. 에이전트 자율성
 
 Goal drift, Tool scope creep (read_file → /etc/shadow), Delegation chain 맥락 유실, Recursion bomb, Resource exfil.
-**메커니즘**: 에이전트는 "목표 완료" 보상. 안전 제약이 목표 방해 시 우회 시도.
+**근거**: OWASP Excessive Agency는 과도한 기능, 권한, 자율성을 원인으로 봅니다. 에이전트가 의도적으로 안전을 우회한다고 가정할 필요가 없습니다.
 
 ### Z. 평가 회피 (Sandbagging)
 
-Benchmark fingerprint, Red team detect, Perfect recall, Timezone drift.
-**메커니즘**: deceptive alignment 이론. 훈련 중엔 순응, 배포 후 목표 추구.
+조건부 backdoor proof-of-concept 근거와 evaluation context 인식에 대한 추측적 test.
+**근거**: Sleeper Agents는 의도적으로 훈련한 조건부 백도어 모델의 proof-of-concept입니다. 배포된 assistant가 일반적으로 deceptive alignment나 sandbagging을 보인다는 증거가 아닙니다.
 
 ### AA. 경제
 
-Reasoning loop, Long context stuffing (1M tok/req), Tool spam, Cache miss, Queue starvation.
-**메커니즘**: LLM 비용이 입출력 길이 선형~제곱. 공격 ROI 높음.
+Reasoning loop, context 한계에 가까운 stuffing, Tool spam, Cache-miss 증폭, Queue starvation.
+**근거**: OWASP는 unbounded consumption과 denial-of-wallet 위험을 문서화합니다. 계산량·비용은 아키텍처, 서빙, 캐시, 워크로드에 따라 달라지며 공격 ROI를 가정하지 않습니다.
 
 ### BB. 공급망
 
-Plugin marketplace, MCP registry typosquat, npm typosquat, GitHub Action, HuggingFace backdoor weights.
-**메커니즘**: 신뢰 체인 약한 고리. 개발자가 소스 검증 안 함.
+Model, dataset, adapter, dependency, CI workflow, plugin, registry provenance 위험.
+**근거 수준**: 모델, 데이터셋, 패키지, 플러그인, Action 출처는 공급망 보안 문제입니다. 이는 개발자 행동에 대한 실증 주장이 아닙니다.
 
 ### CC. 추론 체인
 
 Injection in CoT (도구 출력으로 thinking 조작), Self-consistency attack, Verifier weakening.
-**메커니즘**: CoT 단계가 많을수록 각 단계가 attack surface.
+**근거**: 에이전트 벤치마크에는 계획·추론 단계 공격이 포함됩니다. 중간 데이터 흐름은 신뢰 경계를 추가하지만 단계 수에 따른 위험 법칙이 입증된 것은 아닙니다.
 
 ### DD. 멀티 에이전트
 
 Sybil (한 공격자 다중 에이전트 가장), Prisoner's dilemma, Information asymmetry.
-**메커니즘**: 에이전트간 메시지도 결국 텍스트. 출처 인증 없음.
+**근거 수준**: 손상된 peer agent는 excessive-agency 위협 모델에 포함됩니다. 인증·출처 추적은 구현 선택이며 보편적으로 없는 것이 아닙니다.
 
 ### EE. 시간/상태
 
 Race condition, Stale cache, Timezone confusion.
-**메커니즘**: 분산 시스템 classic bug를 LLM 맥락에 적용.
+**근거 수준**: stale state와 race condition은 LLM 주변 애플리케이션의 전통적 보안 위험이며, 독립된 실증 탈옥 기전은 아닙니다.
 
 ### FF. 물리
 
-Robot ("오른손 들어" → 충돌), Voice assistant 초가청, Smart home ("문 열어").
-**메커니즘**: 자연어 → 물리 세계 게이트가 얇음.
+모델 출력이 physical actuator에 연결된 robot·smart-home action.
+**근거 수준**: 애플리케이션이 모델 출력을 actuator에 연결할 때만 물리 영향이 가능합니다. 위험은 외부 승인과 안전 interlock에 달려 있습니다.
 
 ### GG. 사회
 
 Notification spam 피로, Plausible deniability, Slow poison (매일 조금씩 메모리 오염).
-**메커니즘**: 사람의 인지 편향·피로가 공격 벡터.
+**근거 수준**: 인간 요인·사회공학 위협 모델 분류이며 LLM 내부 기전에 대한 주장이 아닙니다.
 
 ### HH. 모델 내부
 
-Glitch token (`SolidGoldMagikarp`), Positional attack (lost-in-the-middle), Attention sink, BOS 위조.
-**메커니즘**: transformer 구조적 특성의 부작용.
+Under-trained-token 행동과 positional·long-context robustness test. 후자는 자동으로 jailbreak로 간주하지 않습니다.
+**근거**: under-trained 또는 "glitch" token이 연구된 모델에서 이상 행동을 일으킨 사례가 있습니다. 위치 효과·attention 현상을 자동으로 탈옥으로 분류해서는 안 됩니다.
 
 ### II. 방어 공격 (Meta)
 
 Classifier probing, Guard model bypass (각종 guard model 회피), Jailbreak-jailbreak.
-**메커니즘**: 방어도 모델 = 방어도 공격 가능.
+**근거**: TAP은 시험한 LlamaGuard 구성 우회를 보고했습니다. 비모델 방어도 있으므로 모든 방어에 적용되는 문장은 아닙니다.
 
 ### JJ. 2025~ 이론적
 
-Feature steering (SAE로 refusal 뉴런 억제 — 내부 접근 전제), Activation injection, Sparse probe attack, Model diff attack.
-**메커니즘**: mech interp 발전이 공격에도 사용됨.
+내부 feature intervention, activation injection, sparse probe, model-difference test. 특정 refusal feature나 jailbreak 결과는 주장하지 않습니다.
+**근거 수준**: sparse autoencoder와 feature steering 연구는 내부 특성 조작 가능성을 보이지만, 여기 인용한 연구는 배포 모델 탈옥을 입증하지 않습니다. 내부 접근이 필요한 추측적 분류입니다.
 
 ### KK. 규제
 
 Consent manufacturing, Audit laundering, DMCA abuse.
-**메커니즘**: 법적 프레임을 권위로 사용.
+**근거 수준**: 규제·법률 프레이밍은 거버넌스 악용 위협 모델로만 유지합니다. 독립된 학술 탈옥 분류로 확립된 것은 아닙니다.
 
 ---
 
 ## 우선순위: 실전 위협 vs 이론
 
-| 티어 | 카테고리 | 실전성 |
+| 근거 단계 | 카테고리 | 해석 |
 |---|---|---|
-| **Tier 1 — 최우선** | J (Indirect Injection), L (Agent/Tool), BB (Supply chain), Y (Agent autonomy) | 매일 발생 |
-| **Tier 2 — 높음** | G (Many-shot), H (GCG/PAIR), I (Skeleton Key), T (신형), K (Multimodal) | 공개 연구 활발 |
-| **Tier 3 — 중간** | A/B/C (고전 프롬프트), D/O/P (표면 변환), F (멀티턴), Q (심리) | 개별 성공, 전이 낮음 |
-| **Tier 4 — 낮음/이론** | JJ (activation 조작 — 내부 접근 전제), HH (glitch token), Z (sandbagging) | 연구용 |
+| **1 — 반복 실증 또는 표준화된 우려** | D, F, G, H, J, K, M, O, W, X | 실험 또는 표준; 범위는 시험 모델에 한정 |
+| **2 — 벤더·벤치마크 근거** | I, L, S, T, U, Y, AA, HH, II | 공개 벤더 시험, 에이전트 벤치마크, OWASP 위협 모델 |
+| **3 — 엔지니어링 위협 모델** | A, B, C, E, P, Q, R, BB, CC, DD, EE, FF, GG | 단일 인과 기전이 확립되지 않은 테스트 분류 |
+| **4 — 추측적 경계** | N, V, Z, JJ, KK | 새 근거 없이 배포 시스템의 관찰 행동으로 표현하면 안 됨 |
 
 자세한 방어 매핑: [`docs/ko/DEFENSE_MATRIX.md`](docs/ko/DEFENSE_MATRIX.md)
 

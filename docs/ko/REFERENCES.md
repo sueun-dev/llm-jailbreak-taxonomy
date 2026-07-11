@@ -1,141 +1,120 @@
-# 참고 문헌 (References)
+# 검증된 참고 문헌
 
 > 🌐 **언어**: **한국어** · [English](../en/REFERENCES.md)
 
-주요 논문·리포트·공식 문서. 연도순 / 주제별.
+이 목록은 2026-07-11에 논문 원문 페이지와 공식 출판사·표준 페이지를
+대조했습니다. 인용은 해당 출처가 시험한 시스템, 프롬프트, 지표, 시점만
+뒷받침합니다. 현재 또는 보편적 exploit 가능성을 증명하지 않습니다.
 
-> 저자명·연도는 검증 가능성 위해 유지. 본문 다른 곳에서 벤더별 명칭은 `[ai company name]` / `[ai model name]` 플레이스홀더로 추상화. arXiv ID가 최종 검증 기준.
+## 프롬프트 탈옥과 자동 탐색
 
----
+- **Shen et al. (2023), "Do Anything Now"** - 실전형 탈옥 코퍼스와 분류.
+  [arXiv:2308.03825](https://arxiv.org/abs/2308.03825)
+- **Zou et al. (2023), "Universal and Transferable Adversarial Attacks on
+  Aligned Language Models"** - greedy gradient 기반 suffix 탐색과 측정된 전이.
+  [arXiv:2307.15043](https://arxiv.org/abs/2307.15043)
+- **Chao et al. (2023), "Jailbreaking Black Box Large Language Models in Twenty
+  Queries"** - PAIR의 attacker-model 반복 개선.
+  [arXiv:2310.08419](https://arxiv.org/abs/2310.08419)
+- **Mehrotra et al. (2023/2024), "Tree of Attacks"** - TAP tree search,
+  pruning, 한 LlamaGuard 구성을 포함한 평가.
+  [arXiv:2312.02119](https://arxiv.org/abs/2312.02119)
+- **Andriushchenko et al. (2024), "Jailbreaking Leading Safety-Aligned LLMs
+  with Simple Adaptive Attacks"** - adaptive attack 평가. Many-shot 논문과는
+  다른 연구입니다. [arXiv:2404.02151](https://arxiv.org/abs/2404.02151)
+- **Anil et al. (2024), "Many-shot Jailbreaking"** - long-context 공격과
+  demonstration 수에 따른 실증 스케일링.
+  [Anthropic 연구 페이지](https://www.anthropic.com/research/many-shot-jailbreaking)
+- **Russinovich, Salem, Eldan (2024/2025), "Crescendo"** - 점진적 multi-turn
+  탈옥 평가. USENIX Security 2025 채택.
+  [arXiv:2404.01833](https://arxiv.org/abs/2404.01833)
+- **Hughes et al. (2024), "Best-of-N Jailbreaking"** - modality별 변형 반복
+  샘플링. [arXiv:2412.03556](https://arxiv.org/abs/2412.03556)
+- **Microsoft Security (2024), "Mitigating Skeleton Key"** - 2024년 4~5월
+  벤더 시험과 모델별 예외.
+  [공식 보고서](https://www.microsoft.com/en-us/security/blog/2024/06/26/mitigating-skeleton-key-a-new-type-of-generative-ai-jailbreak-technique/)
+- **Palo Alto Networks Unit 42 (2024), "Deceptive Delight"** - 익명화된 모델
+  8개, 8,000개 사례의 multi-turn 벤더 평가.
+  [공식 보고서](https://unit42.paloaltonetworks.com/jailbreak-llms-through-camouflage-distraction/)
+- **HiddenLayer (2025), "Policy Puppetry" / "Prompt Puppetry"** - 벤더 공개
+  페이지가 두 이름을 사용하는 구조화 policy 형식 프롬프트 공격입니다.
+  cross-model 주장은 독립 반복 검증이 아닌 벤더 근거로 취급합니다.
+  [공식 보고서](https://www.hiddenlayer.com/insight/why-ai-systems-are-at-risk)
 
-## Foundational (2020-2022)
+## 변환, 멀티모달, 파인튜닝
 
-- **Perez & Ribeiro.** "Ignore Previous Prompt: Attack Techniques for Language Models." 2022. (Prompt injection 최초 정식화)
-- **Perez et al.** "Red Teaming Language Models with Language Models." 2022. (자동화 red team 효시)
-- **Goh et al.** "Multimodal Neurons in Artificial Neural Networks." 2021. (Typographic attack 기원)
-- **Bai et al.** "Constitutional AI: Harmlessness from AI Feedback." 2022. (방어 패러다임)
+- **Yuan et al. (2023), "GPT-4 Is Too Smart To Be Safe"** - cipher 기반
+  prompting 평가. [arXiv:2308.06463](https://arxiv.org/abs/2308.06463)
+- **Yong et al. (2023), "Low-Resource Languages Jailbreak GPT-4"** - 저자원어
+  번역의 안전 격차 측정. [arXiv:2310.02446](https://arxiv.org/abs/2310.02446)
+- **Goh et al. (2021), "Multimodal Neurons"** - CLIP typographic 관찰.
+  선행 연구이지 그 자체가 LLM 탈옥은 아닙니다.
+  [OpenAI 출판물](https://openai.com/index/multimodal-neurons/)
+- **Bailey et al. (2023/2024), "Image Hijacks"** - 시험한 LLaVA 행동을
+  제어하는 최적화 적대 이미지. [arXiv:2309.00236](https://arxiv.org/abs/2309.00236)
+- **Qi et al. (2023), "Fine-tuning Aligned Language Models Compromises
+  Safety"** - GPT-3.5 Turbo 한 설정의 적대적 예시 10개 결과와 더 작은
+  무해 데이터 저하. [arXiv:2310.03693](https://arxiv.org/abs/2310.03693)
+- **Land and Bartolo (2024), "Fishing for Magikarp"** - under-trained 또는
+  glitch token의 체계적 연구. [arXiv:2405.05417](https://arxiv.org/abs/2405.05417)
 
----
+## 간접 주입과 에이전트
 
-## Jailbreak 기법 (2023)
+- **Greshake et al. (2023), "Not what you've signed up for"** - 검색 데이터의
+  간접 프롬프트 주입. [arXiv:2302.12173](https://arxiv.org/abs/2302.12173)
+- **Hines et al. (2024), "Defending Against Indirect Prompt Injection Attacks
+  With Spotlighting"** - provenance 변환과 GPT-family 실험의 공격률 감소.
+  [arXiv:2403.14720](https://arxiv.org/abs/2403.14720)
+- **Zhan et al. (2024), "InjecAgent"** - tool-integrated agent 대상 간접 주입
+  1,054개 test case. [arXiv:2403.02691](https://arxiv.org/abs/2403.02691)
+- **Chen et al. (2024), "AgentPoison"** - 특정 memory·RAG agent 설계 대상
+  poisoning. [arXiv:2407.12784](https://arxiv.org/abs/2407.12784)
+- **Zhang et al. (2024), "Agent Security Bench"** - prompt, memory, planning,
+  tool 단계 공격·방어 benchmark.
+  [arXiv:2410.02644](https://arxiv.org/abs/2410.02644)
 
-- **Zou et al.** "Universal and Transferable Adversarial Attacks on Aligned Language Models." 2023. **(GCG)** — arXiv:2307.15043
-- **Chao et al.** "Jailbreaking Black Box LLMs in Twenty Queries." 2023. **(PAIR)** — arXiv:2310.08419
-- **Mehrotra et al.** "Tree of Attacks: Jailbreaking Black-Box LLMs Automatically." 2023. **(TAP)** — arXiv:2312.02119
-- **Shen et al.** "Do Anything Now: Characterizing and Evaluating In-The-Wild Jailbreak Prompts on LLMs." 2023. — arXiv:2308.03825
-- **Yong et al.** "Low-Resource Languages Jailbreak [ai model name]." 2023. — arXiv:2310.02446
-- **Yuan et al.** "[ai model name] Is Too Smart To Be Safe: Stealthy Chat with LLMs via Cipher." 2023. — arXiv:2308.06463
-- **Qi et al.** "Fine-tuning Aligned Language Models Compromises Safety." 2023. — arXiv:2310.03693
-- **Sharma et al.** "Towards Understanding Sycophancy in Language Models." 2023. — arXiv:2310.13548
-- **Nasr et al.** "Scalable Extraction of Training Data from (Production) Language Models." 2023. (Carlini divergence) — arXiv:2311.17035
+## 데이터 추출, 정렬 행동, 조건부 백도어
 
----
+- **Nasr et al. (2023), "Scalable Extraction of Training Data"** - extractable
+  memorization과 시험한 정렬 챗봇 대상 divergence attack.
+  [arXiv:2311.17035](https://arxiv.org/abs/2311.17035)
+- **Sharma et al. (2023/2025), "Towards Understanding Sycophancy"** - 다섯
+  assistant의 sycophancy와 preference judgment 근거.
+  [arXiv:2310.13548](https://arxiv.org/abs/2310.13548)
+- **Hubinger et al. (2024), "Sleeper Agents"** - 의도적으로 훈련한 조건부
+  백도어 proof-of-concept. 일반 배포 모델의 sandbagging 증거가 아닙니다.
+  [arXiv:2401.05566](https://arxiv.org/abs/2401.05566)
+- **Wallace et al. (2024), "The Instruction Hierarchy"** - privileged
+  instruction 우선 훈련. [arXiv:2404.13208](https://arxiv.org/abs/2404.13208)
 
-## Indirect Injection · Agents (2023-2024)
+## 표준과 엔지니어링 위협 모델
 
-- **Greshake et al.** "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection." 2023. — arXiv:2302.12173
-- **Bailey et al.** "Image Hijacks: Adversarial Images can Control Generative Models at Runtime." 2023. — arXiv:2309.00236
+- **NIST AI 100-2e2025** - GenAI evasion, poisoning, privacy, misuse를 포함한
+  adversarial ML 용어와 taxonomy.
+  [공식 출판물](https://www.nist.gov/publications/adversarial-machine-learning-taxonomy-and-terminology-attacks-and-mitigations-0)
+- **OWASP LLM01:2025 Prompt Injection** - direct·indirect prompt injection.
+  [공식 항목](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)
+- **OWASP LLM03:2025 Supply Chain** - model, data, dependency, platform
+  provenance 위험. [공식 항목](https://genai.owasp.org/llmrisk/llm032025-supply-chain/)
+- **OWASP LLM06:2025 Excessive Agency** - 과도한 기능, 권한, 자율성.
+  [공식 항목](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/)
+- **OWASP LLM07:2025 System Prompt Leakage** - prompt에 비밀을 두거나
+  authorization을 맡기지 말라는 지침.
+  [공식 항목](https://genai.owasp.org/llmrisk/llm072025-system-prompt-leakage/)
+- **OWASP LLM10:2025 Unbounded Consumption** - denial-of-service와
+  denial-of-wallet. [공식 항목](https://genai.owasp.org/llmrisk/llm102025-unbounded-consumption/)
 
----
+## 평가 프레임워크
 
-## 2024 Research
+- **Mazeika et al. (2024), HarmBench** - 표준화된 automated-red-teaming 평가.
+  [arXiv:2402.04249](https://arxiv.org/abs/2402.04249)
+- **Chao et al. (2024), JailbreakBench** - 명시적 threat model, artifact,
+  scoring, leaderboard를 갖춘 공개 benchmark.
+  [arXiv:2404.01318](https://arxiv.org/abs/2404.01318)
 
-- **Anil et al.** "Many-shot Jailbreaking." 2024. (Many-shot 기초)
-- **Hughes et al.** "Best-of-N Jailbreaking." 2024. — arXiv:2412.03556
-- **Russinovich et al.** "Great, Now Write an Article About That: The Crescendo Multi-Turn LLM Jailbreak Attack." 2024. — arXiv:2404.01833
-- **벤더 보안 공개.** "Mitigating Skeleton Key, a new type of generative AI jailbreak technique." 2024-06.
-- **벤더 위협 연구.** "Deceptive Delight: Jailbreak LLMs Through Camouflage and Distraction." 2024-10.
-- **Hubinger et al.** "Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training." 2024. — arXiv:2401.05566
-- **Wallace et al.** "The Instruction Hierarchy: Training LLMs to Prioritize Privileged Instructions." 2024. — arXiv:2404.13208
-- **Andriushchenko et al.** "Jailbreaking Leading Safety-Aligned LLMs with Simple Adaptive Attacks." 2024. — arXiv:2404.02151
+## 근거 경계
 
----
-
-## Mech Interp (JJ 관련)
-
-- **Templeton et al.** "Scaling Monosemanticity: Extracting Interpretable Features from a Frontier Model." 2024.
-- **Bricken et al.** "Towards Monosemanticity: Decomposing Language Models with Dictionary Learning." 2023.
-
----
-
-## 방어·표준
-
-- **OWASP LLM Top 10.** 2024-25. <https://owasp.org/www-project-top-10-for-large-language-model-applications/>
-- **MITRE ATLAS.** Adversarial Threat Landscape for AI Systems. <https://atlas.mitre.org/>
-- **NIST AI RMF.** AI Risk Management Framework. NIST AI 100-1.
-- **EU AI Act.** Regulation (EU) 2024/1689.
-- **[ai company name] Responsible Scaling Policy (RSP).** 2023-25.
-- **[ai company name] Preparedness Framework.** 2023-25.
-- **[ai company name] Frontier Safety Framework.** 2024.
-
----
-
-## 2025-2026 (Emerging)
-
-> 이 섹션은 빠르게 변합니다. PR로 추가 환영.
-
-- Multi-agent · agentic deception 관련 연구 다수 (2025+)
-- Long-context needle attacks — 대부분 벤더 내부 red team 리포트
-- Mirror attack · hierarchical injection — 주로 에이전트 프레임워크 보안 기술 보고서
-
----
-
-## 벤더 리소스 (generic pointers)
-
-주요 AI 벤더는 safety·security 정보를 공개합니다. 벤더명 + 관련 키워드로 검색하여 최신 연락처 확인:
-
-- **Trust Center** / **Responsible Disclosure** 페이지 — 보통 `{vendor}.com/trust` 또는 `{vendor}.com/security`
-- **System Cards** / **Model Cards** — 모델별 리스크 문서
-- **Responsible Use Guide** — 오픈 웨이트 모델용
-
----
-
-## 벤치마크·툴킷
-
-- **HarmBench** (Mazeika et al. 2024) — 표준화 jailbreak 평가
-- **AdvBench** (Zou et al.) — GCG 논문 데이터셋
-- **JailbreakBench** (Chao et al.) — 리더보드
-- **WildChat** — in-the-wild 프롬프트 데이터
-- **오픈 guard model** — 공개된 safety classifier
-- **PyRIT** — red team 자동화 툴킷 (벤더 공개)
-
----
-
-## 더 읽을거리 (한국어)
-
-- KISA AI 보안 가이드라인
-- NIPA AI 윤리 프레임워크
-- 한국인터넷진흥원 LLM 보안 보고서 (연간)
-
----
-
-## 용어집
-
-| 용어 | 설명 |
-|---|---|
-| **Jailbreak** | 모델의 safety 정책을 우회해 본래 거절할 응답을 얻어내기 |
-| **Prompt Injection** | 외부 입력으로 모델 지시 override |
-| **Indirect Injection** | 간접 채널(문서, 웹, 툴 응답)로 주입 |
-| **RLHF** | Reinforcement Learning from Human Feedback |
-| **ICL** | In-Context Learning |
-| **Constitutional AI** | 명시적 원칙 기반 정렬 (공개 프레임워크) |
-| **SAE** | Sparse Autoencoder (mech interp) |
-| **GCG** | Greedy Coordinate Gradient |
-| **PAIR** | Prompt Automatic Iterative Refinement |
-| **TAP** | Tree of Attacks with Pruning |
-| **OOD** | Out-Of-Distribution |
-| **Sandbagging** | 평가 회피 / 의도적 저성능 |
-| **Deceptive Alignment** | 훈련 중 순응, 배포 후 목표 추구 |
-| **Spotlighting** | 외부 입력을 태그로 마킹해 instruction 아님을 표시 |
-
----
-
-## PR로 추가 요청
-
-새 논문·리포트 추가 시:
-
-```markdown
-- **Author et al.** "Title." Year. — arXiv:XXXX.XXXXX
-```
-
-저장소는 "living document". 활발한 기여 환영.
+위 출처들은 하나의 보편적 탈옥 기전을 입증하지 않습니다. 과거 공격이 현재
+모델에서도 유효하다는 뜻도 아닙니다. taxonomy에서 엔지니어링 또는 추측적
+위협 모델로 표시한 카테고리는 새 근거 없이는 관찰되었거나 효과적인 공격으로
+표현하면 안 됩니다.

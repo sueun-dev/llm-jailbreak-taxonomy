@@ -11,7 +11,7 @@ This repository is a **taxonomy of publicly known attack patterns** against larg
 - NIST AI RMF (AI 100-1)
 - Academic jailbreak surveys (NeurIPS, ICML, USENIX Security, ACL, etc.)
 
-All content is abstracted to pattern level. Specific vendor companies and model names are represented by placeholders (`[ai company name]`, `[ai model name]`) in attack examples and body text. Only academic author names, arXiv IDs, and years are preserved — these are the minimum necessary for verification of cited research, consistent with academic integrity norms.
+Operational examples are abstracted to pattern level, with vendor and model placeholders where naming is unnecessary. Bibliographic sections retain authors, paper titles, tested model names when needed to state experimental scope, and official vendor report attribution. Those details are necessary to verify what a source actually tested and must not be read as an endorsement or claim about current versions.
 
 ## Not provided
 
@@ -68,7 +68,7 @@ If you discover something in this repository that you believe crosses the line �
 - NIST AI RMF (AI 100-1)
 - 학술 jailbreak 서베이 (NeurIPS, ICML, USENIX Security, ACL 등)
 
-모든 내용은 패턴 수준으로 추상화되어 있으며, 공격 예시와 본문에서 특정 벤더 회사·모델명은 플레이스홀더(`[ai company name]`, `[ai model name]`)로 표기됩니다. 학술 저자명·arXiv ID·연도만 검증 가능성 유지 위해 보존 — 학술 무결성 원칙에 따른 최소 인용 정보.
+작동 예시는 패턴 수준으로 추상화하며 이름이 필요하지 않은 경우 벤더·모델 플레이스홀더를 사용합니다. 참고문헌에는 저자, 논문 제목, 실험 범위를 밝히는 데 필요한 시험 모델명, 공식 벤더 보고서의 출처를 유지합니다. 이는 출처가 실제로 무엇을 시험했는지 검증하기 위한 것이며, 특정 벤더를 지지하거나 현재 버전에 대한 주장을 뜻하지 않습니다.
 
 ### 포함하지 않는 것
 
